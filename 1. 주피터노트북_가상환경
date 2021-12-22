@@ -1,0 +1,38 @@
+주피터노트북 가상환경 만들기  
+
+  
+1. 아나콘다 다운로드 및 설치  
+C드라이브에 tool, anaconda3폴더 만들기  
+- 설치프로그램은 C드라이브 - tool 에 저장
+- 아나콘다는 C드라이브 - anaconda3에 저장  
+  
+3. 'cakd3'라는 가상환경 만들기  
+Anaconda Prompt 우클릭 -> 자세히 -> 관리자 권한으로 실행 -> conda env list # 리스트 확인하기  
+-> conda create -n cakd3 python=3.8 -> y  
+-> conda activate cakd3  
+-> conda install jupyter notebook -> y  
+  
+Jupyter Notebook(cakd3)가 생김  
+Jupyter Notebook(cakd3) 우클릭 -> 자세히 -> 파일위치열기 -> 같은파일 우클릭 -> 속성 -> 대상(T) 수정(파일경로 수정 : ~~.py 뒤를 C:\workspace\cakd3 로 수정) -> 적용 -> 확인  
+  
+3. 라이브러리 설치  
+Anaconda Prompt 우클릭 -> 자세히 -> 관리자 권한으로 실행 -> conda activate cakd3  
+-> conda install numpy pandas matplotlib seaborn scipy scikit-learn tensorflow keras -> y  
+-> conda list # 잘 설치되었는지 확인  
+-> conda deactivate -> exit  
+  
+4. 시스템 환경변수 편집 -> 환경변수 -> 시스템변수의 path 선택 -> 편집 -> 새로만들기  
+C:\ca_da\anaconda3  
+C:\ca_da\Anaconda3\Library\mingw-w64-bin  
+C:\ca_da\Anaconda3\Library\bin  
+C:\ca_da\Anaconda3\Scripts  
+위 네 줄 추가 후 확인*3  
+** 경로 오타 방지하기 위해 직접 폴더에 들어가서 경로 복사하기!  
+  
+5.  
+cmd -> conda env list  
+(잘 설치 되었다면 아래와 같이 나옴)  
+# conda environments:  
+#  
+base            * C:\anaconda3  
+cakd3             C:\anaconda3\envs\cakd3
