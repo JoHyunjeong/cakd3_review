@@ -1,158 +1,152 @@
--- 08¿ù 11ÀÏ --
+-- 08ì›” 11ì¼ --
 
 
--- ´Ü¼ø °è»êÇÒ ¶§ FROM dual »ç¿ë
--- Àı´ë°ª
+-- ë‹¨ìˆœ ê³„ì‚°í•  ë•Œ FROM dual ì‚¬ìš©
+-- ì ˆëŒ€ê°’
 SELECT ABS(-78), ABS(+78)
 FROM dual;
 
--- ¹İ¿Ã¸²
+-- ë°˜ì˜¬ë¦¼
 SELECT ROUND(4.875, 1)
 FROM dual;
 
--- Q. °í°´º° Æò±Õ ÁÖ¹® ±İ¾×À» ¹é¿ø ´ÜÀ§·Î ¹İ¿Ã¸²ÇÑ °ªÀ» ±¸ÇÏ½Ã¿À.
+-- Q. ê³ ê°ë³„ í‰ê·  ì£¼ë¬¸ ê¸ˆì•¡ì„ ë°±ì› ë‹¨ìœ„ë¡œ ë°˜ì˜¬ë¦¼í•œ ê°’ì„ êµ¬í•˜ì‹œì˜¤.
 SELECT * FROM orders;
 
-SELECT custid, ROUND(SUM(saleprice)/count(*),-2) "Æò±Õ±İ¾×"
+SELECT custid, ROUND(SUM(saleprice)/count(*),-2) "í‰ê· ê¸ˆì•¡"
 FROM orders
 GROUP BY custid;
 
--- Q. µµ¼­ Á¦¸ñ¿¡ '¾ß±¸'°¡ Æ÷ÇÔµÈ µµ¼­¸¦ '³ó±¸'·Î º¯°æÇÑ ÈÄ µµ¼­ ¸ñ·Ï, °¡°İÀ» º¸ÀÌ½Ã¿À.
-SELECT bookid, REPLACE(bookname, '¾ß±¸','³ó±¸') bookname, publisher, price
+-- Q. ë„ì„œ ì œëª©ì— 'ì•¼êµ¬'ê°€ í¬í•¨ëœ ë„ì„œë¥¼ 'ë†êµ¬'ë¡œ ë³€ê²½í•œ í›„ ë„ì„œ ëª©ë¡, ê°€ê²©ì„ ë³´ì´ì‹œì˜¤.
+SELECT bookid, REPLACE(bookname, 'ì•¼êµ¬','ë†êµ¬') bookname, publisher, price
 FROM book;
 
 SELECT * FROM book;
 
--- Q. '±Â½ºÆ÷Ã÷'¿¡¼­ ÃâÆÇÇÑ µµ¼­ÀÇ Á¦¸ñ°ú Á¦¸ñÀÇ ±ÛÀÚ ¼ö, ¹ÙÀÌÆ® ¼ö¸¦ º¸ÀÌ½Ã¿À.
--- ±ÛÀÚ¼ö LENGTH, ¹ÙÀÌÆ®¼ö LENGTHB
-SELECT bookname Á¦¸ñ, LENGTH(bookname) "Á¦¸ñÀÇ ±ÛÀÚ ¼ö", LENGTHB(bookname) "¹ÙÀÌÆ® ¼ö"
+-- Q. 'êµ¿ìŠ¤í¬ì¸ 'ì—ì„œ ì¶œíŒí•œ ë„ì„œì˜ ì œëª©ê³¼ ì œëª©ì˜ ê¸€ì ìˆ˜, ë°”ì´íŠ¸ ìˆ˜ë¥¼ ë³´ì´ì‹œì˜¤.
+-- ê¸€ììˆ˜ LENGTH, ë°”ì´íŠ¸ìˆ˜ LENGTHB
+SELECT bookname ì œëª©, LENGTH(bookname) "ì œëª©ì˜ ê¸€ì ìˆ˜", LENGTHB(bookname) "ë°”ì´íŠ¸ ìˆ˜"
 FROM book
-WHERE publisher = '±Â½ºÆ÷Ã÷';
+WHERE publisher = 'êµ¿ìŠ¤í¬ì¸ ';
 
--- Q. ¸¶´ç¼­Á¡ÀÇ °í°´ Áß¿¡¼­ °°Àº ¼ºÀ» °¡Áø »ç¶÷ÀÌ ¸î ¸íÀÌ³ª µÇ´ÂÁö ¼ºº° ÀÎ¿ø¼ö¸¦ ±¸ÇÏ½Ã¿À.
+-- Q. ë§ˆë‹¹ì„œì ì˜ ê³ ê° ì¤‘ì—ì„œ ê°™ì€ ì„±ì„ ê°€ì§„ ì‚¬ëŒì´ ëª‡ ëª…ì´ë‚˜ ë˜ëŠ”ì§€ ì„±ë³„ ì¸ì›ìˆ˜ë¥¼ êµ¬í•˜ì‹œì˜¤.
 SELECT * FROM customer;
 
-SELECT SUBSTR(name, 1, 1) ¼º, COUNT(*) ÀÎ¿ø
+SELECT SUBSTR(name, 1, 1) ì„±, COUNT(*) ì¸ì›
 FROM customer
 GROUP BY SUBSTR(name, 1, 1);
 
--- Q. ¸¶´ç¼­Á¡Àº ÁÖ¹®ÀÏ·ÎºÎÅÍ 10ÀÏ ÈÄ ¸ÅÃâÀ» È®Á¤ÇÑ´Ù. °¢ ÁÖ¹®ÀÇ È®Á¤ÀÏÀÚ¸¦ ±¸ÇÏ½Ã¿À.
+-- Q. ë§ˆë‹¹ì„œì ì€ ì£¼ë¬¸ì¼ë¡œë¶€í„° 10ì¼ í›„ ë§¤ì¶œì„ í™•ì •í•œë‹¤. ê° ì£¼ë¬¸ì˜ í™•ì •ì¼ìë¥¼ êµ¬í•˜ì‹œì˜¤.
 SELECT * FROM orders;
-SELECT orderid, custid, orderdate, orderdate+10 È®Á¤ÀÏÀÚ
+SELECT orderid, custid, orderdate, orderdate+10 í™•ì •ì¼ì
 FROM orders;
 
--- ¾Æ¸§bb
-SELECT o.*, o.orderdate + 10 È®Á¤ÀÏÀÚ 
+-- ì•„ë¦„bb
+SELECT o.*, o.orderdate + 10 í™•ì •ì¼ì 
 FROM orders o;
 
--- Q. ¸¶´ç¼­Á¡ÀÌ 2020³â 7¿ù 7ÀÏ¿¡ ÁÖ¹®¹ŞÀº µµ¼­ÀÇ ÁÖ¹®¹øÈ£, ÁÖ¹®ÀÏ, °í°´¹øÈ£, µµ¼­¹øÈ£¸¦ ¸ğµÎ º¸ÀÌ½Ã¿À.
--- ´Ü ÁÖ¹®ÀÏÀº 'yyyy-mm-dd ¿äÀÏ' ÇüÅÂ·Î Ç¥½ÃÇÑ´Ù.
-SELECT orderid ÁÖ¹®¹øÈ£, TO_CHAR(orderdate,'YYYY-mm-dd day') ÁÖ¹®ÀÏ, custid °í°´¹øÈ£, bookid µµ¼­¹øÈ£
+-- Q. ë§ˆë‹¹ì„œì ì´ 2020ë…„ 7ì›” 7ì¼ì— ì£¼ë¬¸ë°›ì€ ë„ì„œì˜ ì£¼ë¬¸ë²ˆí˜¸, ì£¼ë¬¸ì¼, ê³ ê°ë²ˆí˜¸, ë„ì„œë²ˆí˜¸ë¥¼ ëª¨ë‘ ë³´ì´ì‹œì˜¤.
+-- ë‹¨ ì£¼ë¬¸ì¼ì€ 'yyyy-mm-dd ìš”ì¼' í˜•íƒœë¡œ í‘œì‹œí•œë‹¤.
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, TO_CHAR(orderdate,'YYYY-mm-dd day') ì£¼ë¬¸ì¼, custid ê³ ê°ë²ˆí˜¸, bookid ë„ì„œë²ˆí˜¸
 FROM orders
 WHERE orderdate = '2020-07-07';
 
--- Q. DBMS ¼­¹ö¿¡ ¼³Á¤µÈ ÇöÀç ³¯Â¥¿Í ½Ã°£, ¿äÀÏÀ» È®ÀÎÇÏ½Ã¿À.
+-- Q. DBMS ì„œë²„ì— ì„¤ì •ëœ í˜„ì¬ ë‚ ì§œì™€ ì‹œê°„, ìš”ì¼ì„ í™•ì¸í•˜ì‹œì˜¤.
 SELECT SYSDATE
 FROM dual;
 
 SELECT SYSDATE, TO_CHAR(SYSDATE, 'YYYY-mm-dd day HH24:mi:ss') SYSDATE1
 FROM dual;
 
--- mmÀÌ month·Î ÀÎ½ÄµÉ ¼ö ÀÖ´Â Á¡ À¯ÀÇ(???)
+-- mmì´ monthë¡œ ì¸ì‹ë  ìˆ˜ ìˆëŠ” ì  ìœ ì˜(???)
 SELECT SYSDATE, TO_CHAR(SYSDATE, 'YYYY-MM-DD day HH:mi:ss') SYSDATE1
 FROM dual;
 
 
--- Q. ÀÌ¸§, ÀüÈ­¹øÈ£°¡ Æ÷ÇÔµÈ °í°´¸ñ·ÏÀ» º¸ÀÌ½Ã¿À. ´Ü, ÀüÈ­¹øÈ£°¡ ¾ø´Â °í°´Àº '¿¬¶ôÃ³ ¾øÀ½'À¸·Î Ç¥½ÃÇÏ½Ã¿À.
--- NVL(¼Ó¼º,°ª) -> '¼Ó¼º'¿¡¼­ '°ª'À¸·Î Null °ª ´ëÃ¼
-SELECT name ÀÌ¸§, NVL(phone, '¿¬¶ôÃ³ ¾øÀ½') ÀüÈ­¹øÈ£
+-- Q. ì´ë¦„, ì „í™”ë²ˆí˜¸ê°€ í¬í•¨ëœ ê³ ê°ëª©ë¡ì„ ë³´ì´ì‹œì˜¤. ë‹¨, ì „í™”ë²ˆí˜¸ê°€ ì—†ëŠ” ê³ ê°ì€ 'ì—°ë½ì²˜ ì—†ìŒ'ìœ¼ë¡œ í‘œì‹œí•˜ì‹œì˜¤.
+-- NVL(ì†ì„±,ê°’) -> 'ì†ì„±'ì—ì„œ 'ê°’'ìœ¼ë¡œ Null ê°’ ëŒ€ì²´
+SELECT name ì´ë¦„, NVL(phone, 'ì—°ë½ì²˜ ì—†ìŒ') ì „í™”ë²ˆí˜¸
 FROM customer;
 
--- ÁØ±â?
-SELECT name ÀÌ¸§, COALESCE(phone, '¿¬¶ôÃ³ ¾øÀ½') ÀüÈ­¹øÈ£
+SELECT name ì´ë¦„, COALESCE(phone, 'ì—°ë½ì²˜ ì—†ìŒ') ì „í™”ë²ˆí˜¸
 FROM customer;
 
--- ±¤ÈÆ´Ô - Null°ª ¹İÈ¯
 SELECT custid,name, phone
 FROM customer
 WHERE TRIM(phone) IS NULL;
 
--- Q. °í°´¸ñ·Ï¿¡¼­ °í°´¹øÈ£, ÀÌ¸§, ÀüÈ­¹øÈ£¸¦ ¾ÕÀÇ µÎ ¸í¸¸ º¸ÀÌ½Ã¿À.
--- ROWNUM »ç¿ë
-SELECT ROWNUM ¼ø¹ø, custid °í°´¹øÈ£, name ÀÌ¸§, phone ÀüÈ­¹øÈ£
+-- Q. ê³ ê°ëª©ë¡ì—ì„œ ê³ ê°ë²ˆí˜¸, ì´ë¦„, ì „í™”ë²ˆí˜¸ë¥¼ ì•ì˜ ë‘ ëª…ë§Œ ë³´ì´ì‹œì˜¤.
+-- ROWNUM ì‚¬ìš©
+SELECT ROWNUM ìˆœë²ˆ, custid ê³ ê°ë²ˆí˜¸, name ì´ë¦„, phone ì „í™”ë²ˆí˜¸
 FROM customer
 WHERE ROWNUM <=2;
 
--- Q. Æò±Õ ÁÖ¹®±İ¾× ÀÌÇÏÀÇ ÁÖ¹®¿¡ ´ëÇØ¼­ ÁÖ¹®¹øÈ£¿Í ±İ¾×À» º¸ÀÌ½Ã¿À.
+-- Q. í‰ê·  ì£¼ë¬¸ê¸ˆì•¡ ì´í•˜ì˜ ì£¼ë¬¸ì— ëŒ€í•´ì„œ ì£¼ë¬¸ë²ˆí˜¸ì™€ ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤.
 SELECT *
 FROM orders;
 
-SELECT orderid ÁÖ¹®¹øÈ£, saleprice ±İ¾×
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, saleprice ê¸ˆì•¡
 FROM orders
 WHERE saleprice <= (SELECT AVG(saleprice) FROM orders);
 
--- Q. °¢ °í°´ÀÇ Æò±Õ ÁÖ¹®±İ¾×º¸´Ù Å« ±İ¾×ÀÇ ÁÖ¹®³»¿ª¿¡ ´ëÇØ¼­ ÁÖ¹®¹øÈ£, °í°´¹øÈ£, ±İ¾×À» º¸ÀÌ½Ã¿À.
-SELECT orderid ÁÖ¹®¹øÈ£, custid °í°´¹øÈ£, saleprice ±İ¾×
+-- Q. ê° ê³ ê°ì˜ í‰ê·  ì£¼ë¬¸ê¸ˆì•¡ë³´ë‹¤ í° ê¸ˆì•¡ì˜ ì£¼ë¬¸ë‚´ì—­ì— ëŒ€í•´ì„œ ì£¼ë¬¸ë²ˆí˜¸, ê³ ê°ë²ˆí˜¸, ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤.
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, custid ê³ ê°ë²ˆí˜¸, saleprice ê¸ˆì•¡
 FROM orders o1
 WHERE o1.saleprice > (SELECT AVG(o2.saleprice) FROM orders o2 WHERE o2.custid=o1.custid);
 
--- À±Áø´Ô --
-SELECT o1.orderid ÁÖ¹®¹øÈ£, o1.custid °í°´¹øÈ£, o1.saleprice ±İ¾×
+SELECT o1.orderid ì£¼ë¬¸ë²ˆí˜¸, o1.custid ê³ ê°ë²ˆí˜¸, o1.saleprice ê¸ˆì•¡
 FROM orders o1
 WHERE o1.saleprice > (SELECT AVG(o2.saleprice) 
                       FROM orders o2
                       WHERE o1.custid = o2.custid
                       GROUP BY o2.custid);
 
--- Q. '´ëÇÑ¹Î±¹'¿¡ °ÅÁÖÇÏ´Â °í°´¿¡°Ô ÆÇ¸ÅÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À.
+-- Q. 'ëŒ€í•œë¯¼êµ­'ì— ê±°ì£¼í•˜ëŠ” ê³ ê°ì—ê²Œ íŒë§¤í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤.
 SELECT SUM(saleprice)
 FROM customer C, orders O
-WHERE C.custid = O.custid AND address LIKE '%´ëÇÑ¹Î±¹%';
+WHERE C.custid = O.custid AND address LIKE '%ëŒ€í•œë¯¼êµ­%';
 
---¼±»ı´Ô --
 SELECT SUM(saleprice)
 FROM orders O
-WHERE O.custid IN(SELECT custid FROM customer WHERE address LIKE '%´ëÇÑ¹Î±¹%');
+WHERE O.custid IN(SELECT custid FROM customer WHERE address LIKE '%ëŒ€í•œë¯¼êµ­%');
 
--- Q. 3¹ø °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÖ°í ±İ¾×º¸´Ù ´õ ºñ½Ñ µµ¼­¸¦ ±¸ÀÔÇÑ ÁÖ¹®ÀÇ ÁÖ¹®¹øÈ£¿Í ±İ¾×À» º¸ÀÌ½Ã¿À.
-SELECT orderid ÁÖ¹®¹øÈ£, saleprice ±İ¾×
+-- Q. 3ë²ˆ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ìµœê³  ê¸ˆì•¡ë³´ë‹¤ ë” ë¹„ì‹¼ ë„ì„œë¥¼ êµ¬ì…í•œ ì£¼ë¬¸ì˜ ì£¼ë¬¸ë²ˆí˜¸ì™€ ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤.
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, saleprice ê¸ˆì•¡
 FROM orders
 WHERE saleprice > (SELECT MAX(saleprice)
 FROM orders
 WHERE custid = 3
 GROUP BY custid);
 
--- ¼±»ı´Ô--
 SELECT orderid, saleprice
 FROM orders
 WHERE saleprice > ALL(SELECT saleprice FROM orders WHERE custid='3');
 
--- Q. EXISTS ¿¬»êÀÚ¸¦ »ç¿ëÇÏ¿© '´ëÇÑ¹Î±¹'¿¡ °ÅÁÖÇÏ´Â °í°´¿¡°Ô ÆÇ¸ÅÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À.
+-- Q. EXISTS ì—°ì‚°ìë¥¼ ì‚¬ìš©í•˜ì—¬ 'ëŒ€í•œë¯¼êµ­'ì— ê±°ì£¼í•˜ëŠ” ê³ ê°ì—ê²Œ íŒë§¤í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤.
 SELECT SUM(saleprice) total
 FROM orders O
-WHERE EXISTS (SELECT * FROM customer C WHERE address LIKE '´ëÇÑ¹Î±¹%' AND O.custid = C.custid);
+WHERE EXISTS (SELECT * FROM customer C WHERE address LIKE 'ëŒ€í•œë¯¼êµ­%' AND O.custid = C.custid);
 
 
--- Q. ¸¶´ç¼­Á¡ÀÇ °í°´º° ÆÇ¸Å¾×À» º¸ÀÌ½Ã¿À(°í°´ÀÌ¸§°ú °í°´º° ÆÇ¸Å¾× Ãâ·Â)
+-- Q. ë§ˆë‹¹ì„œì ì˜ ê³ ê°ë³„ íŒë§¤ì•¡ì„ ë³´ì´ì‹œì˜¤(ê³ ê°ì´ë¦„ê³¼ ê³ ê°ë³„ íŒë§¤ì•¡ ì¶œë ¥)
 SELECT name, SUM(saleprice)
 FROM orders, customer
 WHERE orders.custid = customer.custid
 GROUP BY name;
 
---¼±»ı´Ô--
 SELECT (SELECT name FROM customer C WHERE C.custid=O.custid) name, SUM(saleprice) total 
 FROM orders O
 GROUP BY O.custid;
 
--- ´Ù¸¥ºĞ(NULL °ª Ã³¸®±îÁö!)
-SELECT C.name °í°´ÀÌ¸§, NVL(SUM(O.saleprice),0) "°í°´º° ÆÇ¸Å¾×"
+-- NULL ê°’ ì²˜ë¦¬ê¹Œì§€
+SELECT C.name ê³ ê°ì´ë¦„, NVL(SUM(O.saleprice),0) "ê³ ê°ë³„ íŒë§¤ì•¡"
 FROM customer C, orders O
 WHERE C.custid = O.custid(+)
 GROUP BY C.name;
 
 
 ---------------------------------------------------------------
--- »õ·Î¿î ÄÃ·³ ¸¸µé¾î¼­ ´Ù¸¥ Å×ÀÌºí¿¡ ÀÖ´Â °ª Ã¤¿ö³Ö±â
+-- ìƒˆë¡œìš´ ì»¬ëŸ¼ ë§Œë“¤ì–´ì„œ ë‹¤ë¥¸ í…Œì´ë¸”ì— ìˆëŠ” ê°’ ì±„ì›Œë„£ê¸°
 SELECT * FROM orders;
 ALTER TABLE orders ADD bookname VARCHAR2(40);
 
@@ -160,79 +154,78 @@ UPDATE orders
 SET bookname = (SELECT bookname FROM book WHERE book.bookid = orders.bookid);
 
 
--- VIEW ¸¸µé±â
+-- VIEW ë§Œë“¤ê¸°
 CREATE VIEW vw_Customer
 AS SELECT *
 FROM customer
-WHERE address LIKE '%´ëÇÑ¹Î±¹%';
+WHERE address LIKE '%ëŒ€í•œë¯¼êµ­%';
 
 SELECT *
 FROM vw_Customer;
 
--- Q. Orders Å×ÀÌºí¿¡¼­ °í°´ÀÌ¸§°ú µµ¼­ÀÌ¸§À» ¹Ù·Î È®ÀÎÇÒ ¼ö ÀÖ´Â ºä¸¦ »ı¼ºÇÑ ÈÄ, '±è¿¬¾Æ' °í°´ÀÌ ±¸ÀÔÇÑ µµ¼­ÀÇ
--- ÁÖ¹®¹øÈ£, µµ¼­ÀÌ¸§, ÁÖ¹®¾×À» º¸ÀÌ½Ã¿À.
-CREATE VIEW vw_±è¿¬¾Æ
-AS SELECT orders.orderid ÁÖ¹®¹øÈ£, book.bookname µµ¼­ÀÌ¸§, orders.saleprice ÁÖ¹®¾×
+-- Q. Orders í…Œì´ë¸”ì—ì„œ ê³ ê°ì´ë¦„ê³¼ ë„ì„œì´ë¦„ì„ ë°”ë¡œ í™•ì¸í•  ìˆ˜ ìˆëŠ” ë·°ë¥¼ ìƒì„±í•œ í›„, 'ê¹€ì—°ì•„' ê³ ê°ì´ êµ¬ì…í•œ ë„ì„œì˜
+-- ì£¼ë¬¸ë²ˆí˜¸, ë„ì„œì´ë¦„, ì£¼ë¬¸ì•¡ì„ ë³´ì´ì‹œì˜¤.
+CREATE VIEW vw_ê¹€ì—°ì•„
+AS SELECT orders.orderid ì£¼ë¬¸ë²ˆí˜¸, book.bookname ë„ì„œì´ë¦„, orders.saleprice ì£¼ë¬¸ì•¡
 FROM orders, book, customer
-WHERE orders.bookid = book.bookid AND orders.custid = customer.custid AND customer.name='±è¿¬¾Æ';
+WHERE orders.bookid = book.bookid AND orders.custid = customer.custid AND customer.name='ê¹€ì—°ì•„';
 
-SELECT * FROM vw_±è¿¬¾Æ;
+SELECT * FROM vw_ê¹€ì—°ì•„;
 
-CREATE VIEW vw_±è¿¬¾Æ1
-AS SELECT orders.orderid ÁÖ¹®¹øÈ£, orders.bookname µµ¼­ÀÌ¸§, orders.saleprice ÁÖ¹®¾×
+CREATE VIEW vw_ê¹€ì—°ì•„1
+AS SELECT orders.orderid ì£¼ë¬¸ë²ˆí˜¸, orders.bookname ë„ì„œì´ë¦„, orders.saleprice ì£¼ë¬¸ì•¡
 FROM orders, customer
-WHERE orders.custid = customer.custid AND customer.name='±è¿¬¾Æ';
+WHERE orders.custid = customer.custid AND customer.name='ê¹€ì—°ì•„';
 
-SELECT * FROM vw_±è¿¬¾Æ1;
-
-
+SELECT * FROM vw_ê¹€ì—°ì•„1;
 
 
 
 
 
--- [°úÁ¦_0811] --
 
--- Q. °¢ °í°´ÀÇ Æò±Õ ÁÖ¹®±İ¾×º¸´Ù Å« ±İ¾×ÀÇ ÁÖ¹®³»¿ª¿¡ ´ëÇØ¼­ ÁÖ¹®¹øÈ£, °í°´¹øÈ£, ±İ¾×À» º¸ÀÌ½Ã¿À.
-SELECT orderid ÁÖ¹®¹øÈ£, custid °í°´¹øÈ£, saleprice ±İ¾×
+
+-- [ê³¼ì œ_0811] --
+
+-- Q. ê° ê³ ê°ì˜ í‰ê·  ì£¼ë¬¸ê¸ˆì•¡ë³´ë‹¤ í° ê¸ˆì•¡ì˜ ì£¼ë¬¸ë‚´ì—­ì— ëŒ€í•´ì„œ ì£¼ë¬¸ë²ˆí˜¸, ê³ ê°ë²ˆí˜¸, ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤.
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, custid ê³ ê°ë²ˆí˜¸, saleprice ê¸ˆì•¡
 FROM orders o1
 WHERE o1.saleprice > (SELECT AVG(o2.saleprice) FROM orders o2 WHERE o2.custid=o1.custid);
 
--- À±Áø´Ô --
-SELECT o1.orderid ÁÖ¹®¹øÈ£, o1.custid °í°´¹øÈ£, o1.saleprice ±İ¾×
+SELECT o1.orderid ì£¼ë¬¸ë²ˆí˜¸, o1.custid ê³ ê°ë²ˆí˜¸, o1.saleprice ê¸ˆì•¡
 FROM orders o1
 WHERE o1.saleprice > (SELECT AVG(o2.saleprice) 
                       FROM orders o2
                       WHERE o1.custid = o2.custid
                       GROUP BY o2.custid);
                       
-SELECT orderid ÁÖ¹®¹øÈ£, custid °í°´¹øÈ£, saleprice ±İ¾×
+SELECT orderid ì£¼ë¬¸ë²ˆí˜¸, custid ê³ ê°ë²ˆí˜¸, saleprice ê¸ˆì•¡
 FROM orders O1
 WHERE O1.saleprice > (SELECT AVG(O2.saleprice) FROM orders O2 GROUP BY O1.custid);
 
 
--- Q. °í°´¹øÈ£°¡ 2 ÀÌÇÏÀÎ °í°´ÀÇ ÆÇ¸Å¾×À» º¸ÀÌ½Ã¿À(°í°´ÀÌ¸§°ú °í°´º° ÆÇ¸Å¾× Ãâ·Â)
-SELECT name °í°´ÀÌ¸§, SUM(saleprice) "°í°´º° ÆÇ¸Å¾×"
+-- Q. ê³ ê°ë²ˆí˜¸ê°€ 2 ì´í•˜ì¸ ê³ ê°ì˜ íŒë§¤ì•¡ì„ ë³´ì´ì‹œì˜¤(ê³ ê°ì´ë¦„ê³¼ ê³ ê°ë³„ íŒë§¤ì•¡ ì¶œë ¥)
+SELECT name ê³ ê°ì´ë¦„, SUM(saleprice) "ê³ ê°ë³„ íŒë§¤ì•¡"
 FROM orders O, customer C
 WHERE O.custid = C.custid AND C.custid <=2
 GROUP BY C.name;
 
--- Q. ÁÖ¼Ò¿¡ '´ëÇÑ¹Î±¹'À» Æ÷ÇÔÇÏ´Â °í°´µé·Î ±¸¼ºµÈ ºä¸¦ ¸¸µé°í Á¶È¸ÇÏ½Ã¿À. ºäÀÇ ÀÌ¸§Àº vw_Customer·Î ¼³Á¤ÇÏ½Ã¿À.
+-- Q. ì£¼ì†Œì— 'ëŒ€í•œë¯¼êµ­'ì„ í¬í•¨í•˜ëŠ” ê³ ê°ë“¤ë¡œ êµ¬ì„±ëœ ë·°ë¥¼ ë§Œë“¤ê³  ì¡°íšŒí•˜ì‹œì˜¤. ë·°ì˜ ì´ë¦„ì€ vw_Customerë¡œ ì„¤ì •í•˜ì‹œì˜¤.
 CREATE VIEW vw_Customer
 AS SELECT *
 FROM customer
-WHERE address LIKE '%´ëÇÑ¹Î±¹%';
+WHERE address LIKE '%ëŒ€í•œë¯¼êµ­%';
 
 SELECT *
 FROM vw_Customer;
 
--- Q. ¾Õ¼­ »ı¼ºÇÑ ºä vw_Customer¸¦ »èÁ¦ÇÏ½Ã¿À.
+-- Q. ì•ì„œ ìƒì„±í•œ ë·° vw_Customerë¥¼ ì‚­ì œí•˜ì‹œì˜¤.
 DROP VIEW vw_Customer;
 
 
--- 08¿ù 12ÀÏ --
+-- 08ì›” 12ì¼ --
 
--- ¹®ÀÚ¿­ °áÇÕ -- 
+-- ë¬¸ìì—´ ê²°í•© -- 
 SELECT * FROM employees;
 
 SELECT last_name,'is a', job_id FROM employees;
@@ -248,31 +241,31 @@ SELECT job_id FROM employees;
 SELECT DISTINCT job_id FROM employees;
 
 
--- NULL °ª È®ÀÎ --
+-- NULL ê°’ í™•ì¸ --
 SELECT * FROM employees WHERE commission_pct is null;
--- NULL ¾Æ´Ñ °ª È®ÀÎ
+-- NULL ì•„ë‹Œ ê°’ í™•ì¸
 SELECT * FROM employees WHERE commission_pct is not null;
 
--- Q. EMPLYEES Å×ÀÌºí¿¡¼­ commission_pctÀÇ Null°ª °¹¼ö¸¦ Ãâ·ÂÇÏ¼¼¿ä.
+-- Q. EMPLYEES í…Œì´ë¸”ì—ì„œ commission_pctì˜ Nullê°’ ê°¯ìˆ˜ë¥¼ ì¶œë ¥í•˜ì„¸ìš”.
 SELECT count(*)
 FROM employees
 WHERE commission_pct is null;
 
 
 
--- ¼ıÀÚ ÇÔ¼ö Number Function --
+-- ìˆ«ì í•¨ìˆ˜ Number Function --
 
 
--- MOD : ³ª¸ÓÁö -- 
+-- MOD : ë‚˜ë¨¸ì§€ -- 
 SELECT MOD(10,3) FROM dual;
 
--- Q. EMPOYEES Å×ÀÌºí¿¡¼­ employee_id°¡ È¦¼öÀÎ °Í¸¸ Ãâ·ÂÇÏ¼¼¿ä.
+-- Q. EMPOYEES í…Œì´ë¸”ì—ì„œ employee_idê°€ í™€ìˆ˜ì¸ ê²ƒë§Œ ì¶œë ¥í•˜ì„¸ìš”.
 SELECT *
 FROM employees
 WHERE MOD(employee_id,2)=1;
 
 
--- ROUND(¼ıÀÚ ¿Ã¸²) --
+-- ROUND(ìˆ«ì ì˜¬ë¦¼) --
 SELECT ROUND(355.95555) FROM dual;
 SELECT ROUND(355.95555,0) FROM dual;
 
@@ -281,7 +274,7 @@ SELECT ROUND(355.95555,2) FROM dual;
 SELECT ROUND(355.95555,-1) FROM dual;
 
 
--- TRUNC(¼ıÀÚ ¹ö¸²) --
+-- TRUNC(ìˆ«ì ë²„ë¦¼) --
 SELECT ROUND(45.5555,1) FROM dual;
 SELECT TRUNC(45.5555,1) FROM dual;
 
@@ -289,144 +282,144 @@ SELECT TRUNC(45.5555,1) FROM dual;
 SELECT * FROM employees;
 
 
--- Q. salary¸¦ ¿ù±ŞÀ¸·Î ¼Ò¼öÁ¡ µÑÂ° ÀÚ¸®¿¡¼­ Àı»èÇÏ¿© ±¸ÇÏ½Ã¿À. --
-SELECT last_name, TRUNC(salary/12,2) ¿ù±Ş FROM employees;
+-- Q. salaryë¥¼ ì›”ê¸‰ìœ¼ë¡œ ì†Œìˆ˜ì  ë‘˜ì§¸ ìë¦¬ì—ì„œ ì ˆì‚­í•˜ì—¬ êµ¬í•˜ì‹œì˜¤. --
+SELECT last_name, TRUNC(salary/12,2) ì›”ê¸‰ FROM employees;
 
 
--- WIDTH_BUCKET : ¹üÀ§³ª´©±â --
--- WIDTH_BUCKET(ÁöÁ¤°ª, ÃÖ¼Ò°ª, ÃÖ´ë°ª, BUCKET°¹¼ö) -- 
+-- WIDTH_BUCKET : ë²”ìœ„ë‚˜ëˆ„ê¸° --
+-- WIDTH_BUCKET(ì§€ì •ê°’, ìµœì†Œê°’, ìµœëŒ€ê°’, BUCKETê°¯ìˆ˜) -- 
 SELECT WIDTH_BUCKET(92, 0, 100, 10) FROM dual;
 
 
 
--- ¹®ÀÚ ÇÔ¼ö -- 
--- UPPER, LOWER -> Á¶È¸ÇÒ ¶§¸¸ Àû¿ë. ¿øº»ÀÌ ¹Ù²îÁö ¾ÊÀ½!
--- UPPER : ¸ğµÎ ´ë¹®ÀÚ·Î ¹Ù²Ù±â --
+-- ë¬¸ì í•¨ìˆ˜ -- 
+-- UPPER, LOWER -> ì¡°íšŒí•  ë•Œë§Œ ì ìš©. ì›ë³¸ì´ ë°”ë€Œì§€ ì•ŠìŒ!
+-- UPPER : ëª¨ë‘ ëŒ€ë¬¸ìë¡œ ë°”ê¾¸ê¸° --
 SELECT UPPER('Hello World') FROM dual;
 
 
--- LOWER : ¸ğµÎ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â --
+-- LOWER : ëª¨ë‘ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸° --
 SELECT LOWER('Hello World') FROM dual;
 
 
--- Q. last_nameÀÌ seoÀÎ »ç¶÷ Ã£±â
+-- Q. last_nameì´ seoì¸ ì‚¬ëŒ ì°¾ê¸°
 select last_name, salary
 from employees
 where LOWER(last_name) = 'seo';
 
 
--- Q. job_idÀÇ ¹®ÀÚ ±æÀÌ¸¦ ±¸ÇÏ¼¼¿ä.
+-- Q. job_idì˜ ë¬¸ì ê¸¸ì´ë¥¼ êµ¬í•˜ì„¸ìš”.
 SELECT job_id, length(job_id) FROM employees;
 
 
--- SUBSTR(¹®ÀÚ¿­, ½ÃÀÛÀ§Ä¡, °¹¼ö) : ½ÃÀÛÀ§Ä¡ºÎÅÍ °¹¼ö¸¸Å­ Ãâ·Â
+-- SUBSTR(ë¬¸ìì—´, ì‹œì‘ìœ„ì¹˜, ê°¯ìˆ˜) : ì‹œì‘ìœ„ì¹˜ë¶€í„° ê°¯ìˆ˜ë§Œí¼ ì¶œë ¥
 SELECT SUBSTR('Hello World',3,3) FROM dual;
 
--- µÚ¿¡¼­ ºÎÅÍ »Ì±â : ½ÃÀÛÀ§Ä¡¿¡ ¸¶ÀÌ³Ê½º °ª
+-- ë’¤ì—ì„œ ë¶€í„° ë½‘ê¸° : ì‹œì‘ìœ„ì¹˜ì— ë§ˆì´ë„ˆìŠ¤ ê°’
 SELECT SUBSTR('Hello World',-3,3) FROM dual;
 
 
--- LPAD(¹®ÀÚ¿­, ÀüÃ¼ ±ÛÀÚ ¼ö, °ø¹é¿¡ Ã¤¿ï ¹®ÀÚ) -> ÀüÃ¼ ±ÛÀÚ ¼ö¿¡¼­ ¹®ÀÚ¿­À» Ã¤¿ì°í ³²Àº ±ÛÀÚ ¼ö¸¦ '°ø¹é¿¡ Ã¤¿ï ¹®ÀÚ'·Î ¿ŞÂÊ¿¡ Ã¤¿ò
--- ¿À¸¥ÂÊ Á¤·Ä ÈÄ ¿ŞÂÊ¿¡ ¹®ÀÚ¸¦ Ã¤¿î´Ù.
+-- LPAD(ë¬¸ìì—´, ì „ì²´ ê¸€ì ìˆ˜, ê³µë°±ì— ì±„ìš¸ ë¬¸ì) -> ì „ì²´ ê¸€ì ìˆ˜ì—ì„œ ë¬¸ìì—´ì„ ì±„ìš°ê³  ë‚¨ì€ ê¸€ì ìˆ˜ë¥¼ 'ê³µë°±ì— ì±„ìš¸ ë¬¸ì'ë¡œ ì™¼ìª½ì— ì±„ì›€
+-- ì˜¤ë¥¸ìª½ ì •ë ¬ í›„ ì™¼ìª½ì— ë¬¸ìë¥¼ ì±„ìš´ë‹¤.
 SELECT LPAD('Hello World',20,'#') FROM dual;
 
--- ¿ŞÂÊ Á¤·Ä ÈÄ ¿À¸¥ÂÊ¿¡ ¹®ÀÚ¸¦ Ã¤¿î´Ù.
+-- ì™¼ìª½ ì •ë ¬ í›„ ì˜¤ë¥¸ìª½ì— ë¬¸ìë¥¼ ì±„ìš´ë‹¤.
 SELECT RPAD('Hello World',20,'#') FROM dual;
 
 
--- TRIM : ´ë»ó ¹®ÀÚ¿­¿¡¼­ ÁöÁ¤ÇÑ ¹®ÀÚ Á¦°Å
+-- TRIM : ëŒ€ìƒ ë¬¸ìì—´ì—ì„œ ì§€ì •í•œ ë¬¸ì ì œê±°
 SELECT last_name,TRIM('A' FROM last_name) FROM employees;
 
--- LTRIM : ´ë»ó ¹®ÀÚ¿­¿¡¼­ ¿ŞÂÊºÎÅÍ ÁöÁ¤ÇÑ ¹®ÀÚ Á¦°Å
+-- LTRIM : ëŒ€ìƒ ë¬¸ìì—´ì—ì„œ ì™¼ìª½ë¶€í„° ì§€ì •í•œ ë¬¸ì ì œê±°
 SELECT LTRIM('aaaHello Worldaaa', 'a') From dual;
 
--- RTRIM : ´ë»ó ¹®ÀÚ¿­¿¡¼­ ¿À¸¥ÂÊºÎÅÍ ÁöÁ¤ÇÑ ¹®ÀÚ Á¦°Å
+-- RTRIM : ëŒ€ìƒ ë¬¸ìì—´ì—ì„œ ì˜¤ë¥¸ìª½ë¶€í„° ì§€ì •í•œ ë¬¸ì ì œê±°
 SELECT RTRIM('aaaHello Worldaaa', 'a') From dual;
 
--- °ø¹é»èÁ¦
+-- ê³µë°±ì‚­ì œ
 SELECT TRIM('   Hello World   ') From dual;
 SELECT LTRIM('   Hello World   ') From dual;
 SELECT RTRIM('   Hello World   ') From dual;
 
 
 
--- ³¯Â¥ ÇÔ¼ö --
+-- ë‚ ì§œ í•¨ìˆ˜ --
 
 
--- ÇöÀç ³¯Â¥ --
+-- í˜„ì¬ ë‚ ì§œ --
 SELECT SYSDATE FROM dual;
 
--- Q. ±Ù¼ÓÀÏ¼ö ±¸ÇÏ±â
-SELECT last_name, TRUNC(SYSDATE-hire_date,0) ±Ù¼ÓÀÏ¼ö FROM employees;
+-- Q. ê·¼ì†ì¼ìˆ˜ êµ¬í•˜ê¸°
+SELECT last_name, TRUNC(SYSDATE-hire_date,0) ê·¼ì†ì¼ìˆ˜ FROM employees;
 
--- Q. ±Ù¼Ó¿¬¼ö ±¸ÇÏ±â
-SELECT last_name, TRUNC((SYSDATE-hire_date)/365,0) ±Ù¼Ó¿¬¼ö FROM employees;
+-- Q. ê·¼ì†ì—°ìˆ˜ êµ¬í•˜ê¸°
+SELECT last_name, TRUNC((SYSDATE-hire_date)/365,0) ê·¼ì†ì—°ìˆ˜ FROM employees;
 
 
--- ADD_MONTHS : Æ¯¼º °³¿ù ¼ö¸¦ ´õÇÑ ³¯Â¥¸¦ ±¸ÇÑ´Ù. --
+-- ADD_MONTHS : íŠ¹ì„± ê°œì›” ìˆ˜ë¥¼ ë”í•œ ë‚ ì§œë¥¼ êµ¬í•œë‹¤. --
 SELECT last_name, ADD_MONTHS(hire_date,6) FROM employees;
 
 
--- LAST_DAY : ÇØ´ç ³¯Â¥°¡ ¼ÓÇÑ ¿ùÀÇ ¸»ÀÏÀ» ¹İÈ¯ÇÏ´Â ÇÔ¼ö --
+-- LAST_DAY : í•´ë‹¹ ë‚ ì§œê°€ ì†í•œ ì›”ì˜ ë§ì¼ì„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜ --
 SELECT LAST_DAY(SYSDATE) FROM dual;
 
 
--- Q. ´ÙÀ½ ´Ş ¸»ÀÏ
+-- Q. ë‹¤ìŒ ë‹¬ ë§ì¼
 SELECT last_name, hire_date, LAST_DAY(ADD_MONTHS(hire_date,1)) FROM employees;
 
 
--- NEXT_DAY : ÀÔ·ÂÇÑ ³¯Â¥ ±âÁØÀ¸·Î ´ÙÀ½ ¿äÀÏÀÇ ³¯Â¥ / (ÀÏ ~ Åä : 1 ~ 7) --
-SELECT hire_date, NEXT_DAY(hire_date, '¿ù') FROM employees;
+-- NEXT_DAY : ì…ë ¥í•œ ë‚ ì§œ ê¸°ì¤€ìœ¼ë¡œ ë‹¤ìŒ ìš”ì¼ì˜ ë‚ ì§œ / (ì¼ ~ í†  : 1 ~ 7) --
+SELECT hire_date, NEXT_DAY(hire_date, 'ì›”') FROM employees;
 SELECT hire_date, NEXT_DAY(hire_date, 2) FROM employees;
 
 
--- MONTHS_BETWEEN() : ³¯Â¥¿Í ³¯Â¥ »çÀÌÀÇ °³¿ù ¼ö¸¦ ±¸ÇÑ´Ù. --
--- Q. ±Ù¼Ó¿ù¼ö ±¸ÇÏ±â
-SELECT last_name, TRUNC(MONTHS_BETWEEN(SYSDATE,hire_date),0) ±Ù¼Ó¿ù¼ö FROM employees;
+-- MONTHS_BETWEEN() : ë‚ ì§œì™€ ë‚ ì§œ ì‚¬ì´ì˜ ê°œì›” ìˆ˜ë¥¼ êµ¬í•œë‹¤. --
+-- Q. ê·¼ì†ì›”ìˆ˜ êµ¬í•˜ê¸°
+SELECT last_name, TRUNC(MONTHS_BETWEEN(SYSDATE,hire_date),0) ê·¼ì†ì›”ìˆ˜ FROM employees;
 
 
--- Q. ÀÔ»çÀÏÀÇ 6°³¿ù ÈÄ Ã¹ ¹øÂ° ¿ù¿äÀÏÀ» ±¸ÇÏ¼¼¿ä.
+-- Q. ì…ì‚¬ì¼ì˜ 6ê°œì›” í›„ ì²« ë²ˆì§¸ ì›”ìš”ì¼ì„ êµ¬í•˜ì„¸ìš”.
 SELECT last_name, hire_date, NEXT_DAY(ADD_MONTHS(hire_date,6),2) D_DAY FROM employees;
 
 
 
--- ÁıÇÕÇÔ¼ö Aggregate Functions : sum(), avg(), max() min() count()
+-- ì§‘í•©í•¨ìˆ˜ Aggregate Functions : sum(), avg(), max() min() count()
 
--- Q. job_id º°·Î ¿¬ºÀÇÕ°è ¿¬ºÀÆò±Õ ÃÖ°í¿¬ºÀ ÃÖÀú¿¬ºÀ ÀÎ¿ø¼ö Ãâ·Â
-SELECT job_id, SUM(salary) ¿¬ºÀÇÕ°è, AVG(salary) ¿¬ºÀÆò±Õ, MAX(salary) ÃÖ°í¿¬ºÀ, MIN(salary) ÃÖÀú¿¬ºÀ, COUNT(*) ÀÎ¿ø¼ö
+-- Q. job_id ë³„ë¡œ ì—°ë´‰í•©ê³„ ì—°ë´‰í‰ê·  ìµœê³ ì—°ë´‰ ìµœì €ì—°ë´‰ ì¸ì›ìˆ˜ ì¶œë ¥
+SELECT job_id, SUM(salary) ì—°ë´‰í•©ê³„, AVG(salary) ì—°ë´‰í‰ê· , MAX(salary) ìµœê³ ì—°ë´‰, MIN(salary) ìµœì €ì—°ë´‰, COUNT(*) ì¸ì›ìˆ˜
 FROM employees
 GROUP BY job_id;
 
--- Q. job_id º°·Î ¿¬ºÀÇÕ°è ¿¬ºÀÆò±Õ ÃÖ°í¿¬ºÀ ÃÖÀú¿¬ºÀ ÀÎ¿ø¼ö Ãâ·Â, ´Ü Æò±Õ¿¬ºÀÀÌ 5000 ÀÌ»óÀÎ °æ¿ì¸¸ Æ÷ÇÔ
-SELECT job_id, SUM(salary) ¿¬ºÀÇÕ°è, AVG(salary) ¿¬ºÀÆò±Õ, MAX(salary) ÃÖ°í¿¬ºÀ, MIN(salary) ÃÖÀú¿¬ºÀ, COUNT(*) ÀÎ¿ø¼ö
+-- Q. job_id ë³„ë¡œ ì—°ë´‰í•©ê³„ ì—°ë´‰í‰ê·  ìµœê³ ì—°ë´‰ ìµœì €ì—°ë´‰ ì¸ì›ìˆ˜ ì¶œë ¥, ë‹¨ í‰ê· ì—°ë´‰ì´ 5000 ì´ìƒì¸ ê²½ìš°ë§Œ í¬í•¨
+SELECT job_id, SUM(salary) ì—°ë´‰í•©ê³„, AVG(salary) ì—°ë´‰í‰ê· , MAX(salary) ìµœê³ ì—°ë´‰, MIN(salary) ìµœì €ì—°ë´‰, COUNT(*) ì¸ì›ìˆ˜
 FROM employees
 GROUP BY job_id
 HAVING AVG(salary) >= 5000;
 
--- Q. job_id º°·Î ¿¬ºÀÇÕ°è ¿¬ºÀÆò±Õ ÃÖ°í¿¬ºÀ ÃÖÀú¿¬ºÀ ÀÎ¿ø¼ö Ãâ·Â, ´Ü Æò±Õ¿¬ºÀÀÌ 5000 ÀÌ»óÀÎ °æ¿ì¸¸ Æ÷ÇÔ, ¿¬ºÀÆò±Õ ±âÁØÀ¸·Î ³»¸²Â÷¼ø
-SELECT job_id, SUM(salary) ¿¬ºÀÇÕ°è, AVG(salary) ¿¬ºÀÆò±Õ, MAX(salary) ÃÖ°í¿¬ºÀ, MIN(salary) ÃÖÀú¿¬ºÀ, COUNT(*) ÀÎ¿ø¼ö
+-- Q. job_id ë³„ë¡œ ì—°ë´‰í•©ê³„ ì—°ë´‰í‰ê·  ìµœê³ ì—°ë´‰ ìµœì €ì—°ë´‰ ì¸ì›ìˆ˜ ì¶œë ¥, ë‹¨ í‰ê· ì—°ë´‰ì´ 5000 ì´ìƒì¸ ê²½ìš°ë§Œ í¬í•¨, ì—°ë´‰í‰ê·  ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœ
+SELECT job_id, SUM(salary) ì—°ë´‰í•©ê³„, AVG(salary) ì—°ë´‰í‰ê· , MAX(salary) ìµœê³ ì—°ë´‰, MIN(salary) ìµœì €ì—°ë´‰, COUNT(*) ì¸ì›ìˆ˜
 FROM employees
 GROUP BY job_id
 HAVING AVG(salary) >= 5000
 ORDER BY AVG(salary) DESC;
 
 
--- Á¶ÀÎ Join
--- »ç¿ø¹øÈ£°¡ 110ÀÎ »ç¿øÀÇ ºÎ¼­¸íÀ» ¾Ë°í ½ÍÀº °æ¿ì
+-- ì¡°ì¸ Join
+-- ì‚¬ì›ë²ˆí˜¸ê°€ 110ì¸ ì‚¬ì›ì˜ ë¶€ì„œëª…ì„ ì•Œê³  ì‹¶ì€ ê²½ìš°
 SELECT * FROM employees WHERE employee_id=110;
 SELECT * FROM departments WHERE department_id=110;
 
--- WHERE »ç¿ë
+-- WHERE ì‚¬ìš©
 SELECT employee_id, department_name FROM employees E, departments D WHERE E.department_id = D.department_id AND employee_id=110;
 
--- JOIN »ç¿ë
+-- JOIN ì‚¬ìš©
 SELECT employee_id, department_name FROM employees E join departments D on E.department_id=D.department_id WHERE employee_id=110;
 
 
--- Q. »ç¿øÀÌ 120¹øÀÎ »ç¶÷ÀÇ »ç¹ø, ÀÌ¸§, ¾÷¹«(job_id), ¾÷¹«¸í(job_title)À» Ãâ·Â.
--- join~on, where·Î Á¶ÀÎÇÏ´Â µÎ °¡Áö ¹æ¹ı ¸ğµÎ.
+-- Q. ì‚¬ì›ì´ 120ë²ˆì¸ ì‚¬ëŒì˜ ì‚¬ë²ˆ, ì´ë¦„, ì—…ë¬´(job_id), ì—…ë¬´ëª…(job_title)ì„ ì¶œë ¥.
+-- join~on, whereë¡œ ì¡°ì¸í•˜ëŠ” ë‘ ê°€ì§€ ë°©ë²• ëª¨ë‘.
 
--- WHERE »ç¿ë
+-- WHERE ì‚¬ìš©
 SELECT * FROM employees;
 SELECT * FROM jobs;
 
@@ -434,13 +427,13 @@ SELECT employee_id, last_name || ' ' || first_name name, J.job_id, job_title
 FROM employees E, jobs J
 WHERE E.job_id = J.job_id and employee_id=120;
 
--- JOIN »ç¿ë
+-- JOIN ì‚¬ìš©
 SELECT employee_id, last_name || ' ' || first_name name, J.job_id, job_title 
 FROM employees E join jobs J on E.job_id = J.job_id
 WHERE E.job_id = J.job_id and employee_id=120;
 
 
--- À¯´ÏÅ©ÇÑ °ª¿¡´Â ¾Õ¿¡ Å×ÀÌºí¾àÀÚ¸¦ ºÙ¿©ÁÖÁö ¾Ê¾Æµµ µÊ :-)
+-- ìœ ë‹ˆí¬í•œ ê°’ì—ëŠ” ì•ì— í…Œì´ë¸”ì•½ìë¥¼ ë¶™ì—¬ì£¼ì§€ ì•Šì•„ë„ ë¨ :-)
 SELECT employee_id, job_title, department_name
 FROM employees E, jobs J, departments D
 WHERE E.job_id = J.job_id
@@ -448,7 +441,7 @@ AND E.department_id = D.department_id;
 
 
 
--- 3°³ Å×ÀÌºí ¿¬°áÇØº¸±â!
+-- 3ê°œ í…Œì´ë¸” ì—°ê²°í•´ë³´ê¸°!
 SELECT *  
 FROM countries C, regions R, locations L 
 WHERE C.region_id=R.region_id and C.country_id=L.country_id;
@@ -458,63 +451,61 @@ FROM EMPLOYEES E, DEPARTMENTS D, LOCATIONS L
 WHERE E.department_id = D.department_id AND L.location_id = D.location_id
 GROUP BY L.city, D.department_name;
 
--- À¯ÈÆ´Ô
 SELECT E.last_name, L.city, L.street_address FROM EMPLOYEES E, DEPARTMENTS D, LOCATIONS L
 WHERE E.department_id = D.department_id AND L.location_id = D.location_id;
 
 
--- self join ÇÏ³ªÀÇ Å×ÀÌºíÀÌ µÎ °³ÀÇ Å×ÀÌºíÀÎ °ÍÃ³·³ Á¶ÀÎ
-SELECT E.employee_id »ç¹ø, E.last_name ÀÌ¸§, M.last_name, M.manager_id ºÎ¼­Àå
+-- self join í•˜ë‚˜ì˜ í…Œì´ë¸”ì´ ë‘ ê°œì˜ í…Œì´ë¸”ì¸ ê²ƒì²˜ëŸ¼ ì¡°ì¸
+SELECT E.employee_id ì‚¬ë²ˆ, E.last_name ì´ë¦„, M.last_name, M.manager_id ë¶€ì„œì¥
 FROM employees E, employees M
 WHERE E.employee_id = M.employee_id;
 
--- ÀÌ°Ç ¾ÈµÊ!
+-- ì´ê±´ ì•ˆë¨!
 SELECT *
 FROM employees;
 WHERE employee_id = manager_id;
 
 
--- outer join : Á¶ÀÎ Á¶°Ç¿¡ ¸¸Á·ÇÏÁö ¸øÇÏ´õ¶óµµ ÇØ´ç ÇàÀ» ³ªÅ¸³»°í ½ÍÀ» ¶§ »ç¿ë
-SELECT E.employee_id »ç¹ø, E.last_name ÀÌ¸§, M.last_name »ç¿ø, M.manager_id ºÎ¼­Àå
+-- outer join : ì¡°ì¸ ì¡°ê±´ì— ë§Œì¡±í•˜ì§€ ëª»í•˜ë”ë¼ë„ í•´ë‹¹ í–‰ì„ ë‚˜íƒ€ë‚´ê³  ì‹¶ì„ ë•Œ ì‚¬ìš©
+SELECT E.employee_id ì‚¬ë²ˆ, E.last_name ì´ë¦„, M.last_name ì‚¬ì›, M.manager_id ë¶€ì„œì¥
 FROM employees E, employees M
 WHERE E.employee_id = M.manager_id(+)
-ORDER BY ÀÌ¸§;
+ORDER BY ì´ë¦„;
 
 
--- UNION(ÇÕÁıÇÕ) INTERSECT(±³ÁıÇÕ) MINUS(Â÷ÁıÇÕ) UNION ALL(°ãÄ¡´Â °Í±îÁö Æ÷ÇÔ) --
+-- UNION(í•©ì§‘í•©) INTERSECT(êµì§‘í•©) MINUS(ì°¨ì§‘í•©) UNION ALL(ê²¹ì¹˜ëŠ” ê²ƒê¹Œì§€ í¬í•¨) --
 
--- UNION(ÇÕÁıÇÕ) --
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+-- UNION(í•©ì§‘í•©) --
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE salary < 5000
 UNION
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE hire_date < '02/01/01';
 
--- UNION ALL(°ãÄ¡´Â °Í±îÁö Æ÷ÇÔ) --
--- Áßº¹ Æ÷ÇÔ(??????????)
+-- UNION ALL(ê²¹ì¹˜ëŠ” ê²ƒê¹Œì§€ í¬í•¨) --
 
--- INTERSECT(±³ÁıÇÕ) --
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+-- INTERSECT(êµì§‘í•©) --
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE salary > 15000
 INTERSECT
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE hire_date < '02/01/01';
 
--- MINUS(Â÷ÁıÇÕ) --
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+-- MINUS(ì°¨ì§‘í•©) --
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE salary > 15000
 MINUS
-SELECT first_name ÀÌ¸§, salary ±Ş¿© FROM employees
+SELECT first_name ì´ë¦„, salary ê¸‰ì—¬ FROM employees
 WHERE hire_date < '02/01/01';
 
 
--- all : ¸ŞÀÎ Äõ¸®ÀÇ ºñ±³ Á¶°ÇÀÌ ¼­ºê Äõ¸®ÀÇ °Ë»ö °á°ú°ª°ú ¸ğµÎ ÀÏÄ¡ÇÏ¸é Âü.
--- Q. 100¹ø ºÎ¼­ÀÇ ±¸¼º¿ø ¸ğµÎÀÇ ±Ş¿©º¸´Ù ´õ ¸¹Àº ±Ş¿©¸¦ ¹Ş´Â »ç¿øÀ» Ãâ·Â
+-- all : ë©”ì¸ ì¿¼ë¦¬ì˜ ë¹„êµ ì¡°ê±´ì´ ì„œë¸Œ ì¿¼ë¦¬ì˜ ê²€ìƒ‰ ê²°ê³¼ê°’ê³¼ ëª¨ë‘ ì¼ì¹˜í•˜ë©´ ì°¸.
+-- Q. 100ë²ˆ ë¶€ì„œì˜ êµ¬ì„±ì› ëª¨ë‘ì˜ ê¸‰ì—¬ë³´ë‹¤ ë” ë§ì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì‚¬ì›ì„ ì¶œë ¥
 SELECT last_name, salary
 FROM employees
 WHERE salary > ALL(SELECT salary FROM employees WHERE department_id=100);
 
--- any : ¸ŞÀÎ Äõ¸®ÀÇ ºñ±³ Á¶°ÇÀÌ ¼­ºê Äõ¸®ÀÇ °Ë»ö °á°ú°ª°ú ÇÏ³ª ÀÌ»ó ÀÏÄ¡ÇÏ¸é Âü.
+-- any : ë©”ì¸ ì¿¼ë¦¬ì˜ ë¹„êµ ì¡°ê±´ì´ ì„œë¸Œ ì¿¼ë¦¬ì˜ ê²€ìƒ‰ ê²°ê³¼ê°’ê³¼ í•˜ë‚˜ ì´ìƒ ì¼ì¹˜í•˜ë©´ ì°¸.
 SELECT last_name, salary FROM employees WHERE salary > any
 (SELECT salary FROM employees WHERE department_id=100);
 
@@ -522,77 +513,74 @@ SELECT last_name, salary FROM employees WHERE salary > any
 
 
 
---[°úÁ¦_0812] --
+--[ê³¼ì œ_0812] --
 
---Q1. 2005³â ÀÌÈÄ¿¡ ÀÔ»çÇÑ Á÷¿øÀÇ »ç¹ø, ÀÌ¸§, ÀÔ»çÀÏ, ºÎ¼­¸í(department_name),¾÷¹«¸í(job_title)À» Ãâ·Â
-SELECT employee_id »ç¹ø, last_name ÀÌ¸§, hire_date ÀÔ»çÀÏ, department_name ºÎ¼­¸í, job_title ¾÷¹«¸í
+--Q1. 2005ë…„ ì´í›„ì— ì…ì‚¬í•œ ì§ì›ì˜ ì‚¬ë²ˆ, ì´ë¦„, ì…ì‚¬ì¼, ë¶€ì„œëª…(department_name),ì—…ë¬´ëª…(job_title)ì„ ì¶œë ¥
+SELECT employee_id ì‚¬ë²ˆ, last_name ì´ë¦„, hire_date ì…ì‚¬ì¼, department_name ë¶€ì„œëª…, job_title ì—…ë¬´ëª…
 FROM employees E, departments D, jobs J
 WHERE E.department_id=D.department_id AND E.job_id=J.job_id AND TO_CHAR(hire_date,'yy')>=05;
 
--- ´Ù¸¥ºĞ--
-SELECT employee_id »ç¹ø, last_name ÀÌ¸§, hire_date ÀÔ»çÀÏ, department_name ºÎ¼­¸í, job_title ¾÷¹«¸í
+SELECT employee_id ì‚¬ë²ˆ, last_name ì´ë¦„, hire_date ì…ì‚¬ì¼, department_name ë¶€ì„œëª…, job_title ì—…ë¬´ëª…
 FROM employees E, departments D, jobs J
 WHERE E.department_id=D.department_id AND E.job_id=J.job_id AND hire_date >= '05/01/01';
 
--- Q2. job_title, department_name º°·Î Æò±Õ ¿¬ºÀÀ» ±¸ÇÑ ÈÄ Ãâ·ÂÇÏ¼¼¿ä.
+-- Q2. job_title, department_name ë³„ë¡œ í‰ê·  ì—°ë´‰ì„ êµ¬í•œ í›„ ì¶œë ¥í•˜ì„¸ìš”.
 SELECT job_title, department_name, AVG(salary)
 FROM employees E, departments D, jobs J
 WHERE E.department_id=D.department_id AND E.job_id=J.job_id
 GROUP BY job_title, department_name;
 
---Q3. Æò±Õº¸´Ù ¸¹Àº ±Ş¿©¸¦ ¹Ş´Â Á÷¿ø °Ë»ö ÈÄ Ãâ·ÂÇÏ¼¼¿ä.
+--Q3. í‰ê· ë³´ë‹¤ ë§ì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì§ì› ê²€ìƒ‰ í›„ ì¶œë ¥í•˜ì„¸ìš”.
 SELECT *
 FROM employees
 WHERE salary > (SELECT AVG(salary) FROM employees);
 
---Q4. last_nameÀÌ KingÀÎ Á÷¿øÀÇ last_name,hire_date,department_id¸¦ Ãâ·ÂÇÏ¼¼¿ä
+--Q4. last_nameì´ Kingì¸ ì§ì›ì˜ last_name,hire_date,department_idë¥¼ ì¶œë ¥í•˜ì„¸ìš”
 SELECT last_name, hire_date, department_id
 FROM employees
 WHERE last_name LIKE 'King';
 
---Q5. »ç¹ø, ÀÌ¸§, Á÷±ŞÀ» Ãâ·ÂÇÏ¼¼¿ä. ´Ü Á÷±ŞÀº ¾Æ·¡ ±âÁØ¿¡ ÀÇÇÔ
--- salary > 20000 then '´ëÇ¥ÀÌ»ç'
--- salary > 15000 then 'ÀÌ»ç'
--- salary > 10000 then 'ºÎÀå'
--- salary > 5000 then '°úÀå'
--- salary > 3000 then '´ë¸®'
--- ³ª¸ÓÁö '»ç¿ø'
-SELECT employee_id »ç¹ø, last_name ÀÌ¸§, 
-CASE WHEN salary > 20000 THEN '´ëÇ¥ÀÌ»ç'
-     WHEN salary > 15000 THEN 'ÀÌ»ç'
-     WHEN salary > 10000 THEN 'ºÎÀå'
-     WHEN salary > 5000 THEN '°úÀå'
-     WHEN salary > 3000 THEN '´ë¸®'
-     ELSE '»ç¿ø'
-     END AS Á÷±Ş
+--Q5. ì‚¬ë²ˆ, ì´ë¦„, ì§ê¸‰ì„ ì¶œë ¥í•˜ì„¸ìš”. ë‹¨ ì§ê¸‰ì€ ì•„ë˜ ê¸°ì¤€ì— ì˜í•¨
+-- salary > 20000 then 'ëŒ€í‘œì´ì‚¬'
+-- salary > 15000 then 'ì´ì‚¬'
+-- salary > 10000 then 'ë¶€ì¥'
+-- salary > 5000 then 'ê³¼ì¥'
+-- salary > 3000 then 'ëŒ€ë¦¬'
+-- ë‚˜ë¨¸ì§€ 'ì‚¬ì›'
+SELECT employee_id ì‚¬ë²ˆ, last_name ì´ë¦„, 
+CASE WHEN salary > 20000 THEN 'ëŒ€í‘œì´ì‚¬'
+     WHEN salary > 15000 THEN 'ì´ì‚¬'
+     WHEN salary > 10000 THEN 'ë¶€ì¥'
+     WHEN salary > 5000 THEN 'ê³¼ì¥'
+     WHEN salary > 3000 THEN 'ëŒ€ë¦¬'
+     ELSE 'ì‚¬ì›'
+     END AS ì§ê¸‰
 FROM employees;
--- if~elif~elseÁ¶°Ç¹®°ú °°Àº ¿ëµµ!
+-- if~elif~elseì¡°ê±´ë¬¸ê³¼ ê°™ì€ ìš©ë„!
 
---Q6.employees Å×ÀÌºí·Î ºÎÅÍ last_name,salary,ÃÖ°í¿¬ºÀÀ» Ãâ·ÂÇÏ¼¼¿ä.
--- ´Ü, ÃÖ°í¿¬ºÀÀº first_value ~over ·Î ±¸ÇÑ´Ù.
-SELECT last_name, salary, FIRST_VALUE(salary) OVER(ORDER BY salary DESC) ÃÖ°í¿¬ºÀ
+--Q6.employees í…Œì´ë¸”ë¡œ ë¶€í„° last_name,salary,ìµœê³ ì—°ë´‰ì„ ì¶œë ¥í•˜ì„¸ìš”.
+-- ë‹¨, ìµœê³ ì—°ë´‰ì€ first_value ~over ë¡œ êµ¬í•œë‹¤.
+SELECT last_name, salary, FIRST_VALUE(salary) OVER(ORDER BY salary DESC) ìµœê³ ì—°ë´‰
 FROM employees;
 
---Q.7 ºÎ¼­º° ¿¬ºÀ ¼øÀ§¸¦ Ãâ·ÂÇÏ¼¼¿ä.
---ÈñÁø´Ô--
-SELECT last_name, salary, job_id, RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) "¿¬ºÀ ¼øÀ§"
+--Q.7 ë¶€ì„œë³„ ì—°ë´‰ ìˆœìœ„ë¥¼ ì¶œë ¥í•˜ì„¸ìš”.
+SELECT last_name, salary, job_id, RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) "ì—°ë´‰ ìˆœìœ„"
 FROM employees
 ORDER BY job_id;
 
---À±Áø´Ô--
-SELECT e.last_name ÀÌ¸§, d1.department_name ºÎ¼­¸í, e.salary ¿¬ºÀ,
-RANK() OVER(PARTITION BY d1.department_name ORDER BY e.salary DESC) AS "ºÎ¼­º° ¿¬ºÀ ¼øÀ§"
+SELECT e.last_name ì´ë¦„, d1.department_name ë¶€ì„œëª…, e.salary ì—°ë´‰,
+RANK() OVER(PARTITION BY d1.department_name ORDER BY e.salary DESC) AS "ë¶€ì„œë³„ ì—°ë´‰ ìˆœìœ„"
 FROM employees e, departments d1, departments d2
 WHERE e.department_id = d1.department_id AND d1.department_id = d2.department_id;
 
---Q8.employees Å×ÀÌºí¿¡¼­ employee_id¿Í salary¸¸ ÃßÃâÇØ¼­ employee_salary Å×ÀÌºíÀ» »ı¼ºÇÏ¼¼¿ä.
+--Q8.employees í…Œì´ë¸”ì—ì„œ employee_idì™€ salaryë§Œ ì¶”ì¶œí•´ì„œ employee_salary í…Œì´ë¸”ì„ ìƒì„±í•˜ì„¸ìš”.
 CREATE TABLE employee_salary 
 AS SELECT employee_id, salary
 FROM employees;
 
 SELECT * FROM employee_salary;
 
---Q9. employee_salary Å×ÀÌºí¿¡ first_name,last_name ÄÃ·³À» Ãß°¡ÇÏ¼¼¿ä.
+--Q9. employee_salary í…Œì´ë¸”ì— first_name,last_name ì»¬ëŸ¼ì„ ì¶”ê°€í•˜ì„¸ìš”.
 ALTER TABLE employee_salary ADD(
 first_name VARCHAR2(40),
 last_name VARCHAR2(40));
@@ -605,12 +593,12 @@ SET (a.first_name, a.last_name) =
 SELECT *
 FROM employee_salary;
 
---Q10.last_nameÀ» nameÀ¸·Î º¯°æÇÏ¼¼¿ä
+--Q10.last_nameì„ nameìœ¼ë¡œ ë³€ê²½í•˜ì„¸ìš”
 ALTER TABLE employee_salary RENAME COLUMN last_name TO name;
 
---Q11. employees_salary Å×ÀÌºíÀÇ employee_id¿¡ ±âº»Å°¸¦ Àû¿ëÇÏ°í CONSTRAINT_NAMEÀ» ES_PK·Î ÁöÁ¤ ÈÄ
--- Ãâ·ÂÇÏ¼¼¿ä.
+--Q11. employees_salary í…Œì´ë¸”ì˜ employee_idì— ê¸°ë³¸í‚¤ë¥¼ ì ìš©í•˜ê³  CONSTRAINT_NAMEì„ ES_PKë¡œ ì§€ì • í›„
+-- ì¶œë ¥í•˜ì„¸ìš”.
 ALTER TABLE employee_salary ADD CONSTRAINT ES_PK PRIMARY KEY(employee_id);
 
---Q12. employee_salary Å×ÀÌºíÀÇ employee_id¿¡¼­ CONSTRAINT_NAMEÀ» »èÁ¦ ÈÄ »èÁ¦ ¿©ºÎ¸¦ È®ÀÎÇÏ¼¼¿ä.
+--Q12. employee_salary í…Œì´ë¸”ì˜ employee_idì—ì„œ CONSTRAINT_NAMEì„ ì‚­ì œ í›„ ì‚­ì œ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ì„¸ìš”.
 ALTER TABLE employee_salary DROP CONSTRAINT ES_PK;
