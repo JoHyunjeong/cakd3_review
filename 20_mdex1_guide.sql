@@ -1,25 +1,25 @@
-/* 08¿ù 10ÀÏ */
+/* 08ì›” 10ì¼ */
 
-/* ¹®¹ýÀº ´ë¹®ÀÚ·Î ¾²¸é °¡µ¶¼ºÀÌ ÁÁÀ½ */
-/* SELECT - Á¶È¸ */
+/* ë¬¸ë²•ì€ ëŒ€ë¬¸ìžë¡œ ì“°ë©´ ê°€ë…ì„±ì´ ì¢‹ìŒ */
+/* SELECT - ì¡°íšŒ */
 SELECT * FROM book;
 
 SELECT bookname, price FROM book;
 
--- [ÁúÀÇ 3-2] ¸ðµç µµ¼­ÀÇ µµ¼­¹øÈ£, µµ¼­ÀÌ¸§, ÃâÆÇ»ç, °¡°ÝÀ» °Ë»öÇÏ½Ã¿À.
+-- [ì§ˆì˜ 3-2] ëª¨ë“  ë„ì„œì˜ ë„ì„œë²ˆí˜¸, ë„ì„œì´ë¦„, ì¶œíŒì‚¬, ê°€ê²©ì„ ê²€ìƒ‰í•˜ì‹œì˜¤.
 SELECT bookid, bookname, publisher, price FROM book;
 
 SELECT publisher FROM book;
 
--- Áßº¹Á¦°Å --
+-- ì¤‘ë³µì œê±° --
 SELECT DISTINCT publisher FROM book; 
 
--- WHERE : Á¶°Ç --
+-- WHERE : ì¡°ê±´ --
 SELECT *
 FROM book
 WHERE price < 10000;
 
--- Q. °¡°ÝÀÌ 10000 ÀÌ»ó 20000 ÀÌÇÏÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À. --
+-- Q. ê°€ê²©ì´ 10000 ì´ìƒ 20000 ì´í•˜ì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
 WHERE price BETWEEN 10000 and 20000;
@@ -28,193 +28,190 @@ SELECT *
 FROM book
 WHERE price >= 10000 and price <= 20000;
 
--- Q. ÃâÆÇ»ç°¡ '±Â½ºÆ÷Ã÷' È¤Àº '´ëÇÑ¹Ìµð¾î'ÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À. --
+-- Q. ì¶œíŒì‚¬ê°€ 'êµ¿ìŠ¤í¬ì¸ ' í˜¹ì€ 'ëŒ€í•œë¯¸ë””ì–´'ì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
-WHERE publisher IN ('±Â½ºÆ÷Ã÷','´ëÇÑ¹Ìµð¾î');
+WHERE publisher IN ('êµ¿ìŠ¤í¬ì¸ ','ëŒ€í•œë¯¸ë””ì–´');
 
 SELECT *
 FROM book
-WHERE publisher = '±Â½ºÆ÷Ã÷' or publisher = '´ëÇÑ¹Ìµð¾î';
+WHERE publisher = 'êµ¿ìŠ¤í¬ì¸ ' or publisher = 'ëŒ€í•œë¯¸ë””ì–´';
 
--- Q. ÃâÆÇ»ç°¡ '±Â½ºÆ÷Ã÷' È¤Àº '´ëÇÑ¹Ìµð¾î'°¡ ¾Æ´Ñ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À. --
+-- Q. ì¶œíŒì‚¬ê°€ 'êµ¿ìŠ¤í¬ì¸ ' í˜¹ì€ 'ëŒ€í•œë¯¸ë””ì–´'ê°€ ì•„ë‹Œ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
-WHERE publisher NOT IN ('±Â½ºÆ÷Ã÷','´ëÇÑ¹Ìµð¾î');
+WHERE publisher NOT IN ('êµ¿ìŠ¤í¬ì¸ ','ëŒ€í•œë¯¸ë””ì–´');
 
--- Æ¯Á¤ ÆÐÅÏÀ» Áö´Ñ °ª °ñ¶ó³»±â --
+-- íŠ¹ì • íŒ¨í„´ì„ ì§€ë‹Œ ê°’ ê³¨ë¼ë‚´ê¸° --
 SELECT bookname, publisher
 FROM book
-WHERE bookname LIKE 'Ãà±¸ÀÇ ¿ª»ç';
+WHERE bookname LIKE 'ì¶•êµ¬ì˜ ì—­ì‚¬';
 
--- Q. µµ¼­ÀÌ¸§¿¡ 'Ãà±¸'°¡ Æ÷ÇÔµÈ ÃâÆÇ»ç¸¦ °Ë»öÇÏ½Ã¿À.
+-- Q. ë„ì„œì´ë¦„ì— 'ì¶•êµ¬'ê°€ í¬í•¨ëœ ì¶œíŒì‚¬ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 SELECT bookname, publisher
 FROM book
-WHERE bookname LIKE '%Ãà±¸%'; -- %´Â 0¹ø ÀÌ»ó ¹ß»ýÇÏ´Â °Í--
+WHERE bookname LIKE '%ì¶•êµ¬%'; -- %ëŠ” 0ë²ˆ ì´ìƒ ë°œìƒí•˜ëŠ” ê²ƒ--
 
--- Q. µµ¼­ÀÌ¸§ÀÇ ¿ÞÂÊ µÎ ¹øÂ° À§Ä¡¿¡ '-±¸'¶ó´Â ¹®ÀÚ¿­À» °®´Â µµ¼­¸¦ °Ë»öÇÏ½Ã¿À. --
--- Æ¯Á¤À§Ä¡´Â _(¾ð´õ¹Ù)¸¦ »ç¿ë! --
+-- Q. ë„ì„œì´ë¦„ì˜ ì™¼ìª½ ë‘ ë²ˆì§¸ ìœ„ì¹˜ì— '-êµ¬'ë¼ëŠ” ë¬¸ìžì—´ì„ ê°–ëŠ” ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤. --
+-- íŠ¹ì •ìœ„ì¹˜ëŠ” _(ì–¸ë”ë°”)ë¥¼ ì‚¬ìš©! --
 SELECT bookname, publisher
 FROM book
-WHERE bookname LIKE '_±¸%';
+WHERE bookname LIKE '_êµ¬%';
 
--- Q. Ãà±¸¿¡ °üÇÑ µµ¼­ Áß °¡°ÝÀÌ 20000¿ø ÀÌ»óÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À. --
+-- Q. ì¶•êµ¬ì— ê´€í•œ ë„ì„œ ì¤‘ ê°€ê²©ì´ 20000ì› ì´ìƒì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
-WHERE bookname LIKE '%Ãà±¸%' and price >= 20000;
+WHERE bookname LIKE '%ì¶•êµ¬%' and price >= 20000;
 
--- bookname ±âÁØÀ¸·Î Á¤·ÄÇØ¼­ °Ë»ö --
+-- bookname ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•´ì„œ ê²€ìƒ‰ --
 SELECT *
 FROM book
 ORDER BY bookname;
 
--- Q. µµ¼­¸¦ °¡°Ý¼øÀ¸·Î °Ë»öÇÏ°í, °¡°ÝÀÌ °°À¸¸é ÀÌ¸§¼øÀ¸·Î °Ë»öÇÏ½Ã¿À. --
+-- Q. ë„ì„œë¥¼ ê°€ê²©ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ê³ , ê°€ê²©ì´ ê°™ìœ¼ë©´ ì´ë¦„ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
 ORDER BY price, bookname;
 
--- ASC - ¿À¸§Â÷¼ø(µðÆúÆ®) --
---DESC - ³»¸²Â÷¼ø --
+-- ASC - ì˜¤ë¦„ì°¨ìˆœ(ë””í´íŠ¸) --
+--DESC - ë‚´ë¦¼ì°¨ìˆœ --
 
--- Q. µµ¼­¸¦ °¡°ÝÀÇ ³»¸²Â÷¼øÀ¸·Î °Ë»öÇÏ½Ã¿À. ¸¸¾à °¡°ÝÀÌ °°´Ù¸é ÃâÆÇ»çÀÇ ¿À¸§Â÷¼øÀ¸·Î Ãâ·ÂÇÏ½Ã¿À. --
+-- Q. ë„ì„œë¥¼ ê°€ê²©ì˜ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ì‹œì˜¤. ë§Œì•½ ê°€ê²©ì´ ê°™ë‹¤ë©´ ì¶œíŒì‚¬ì˜ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì¶œë ¥í•˜ì‹œì˜¤. --
 SELECT *
 FROM book
 ORDER BY price DESC, publisher;
 
 SELECT * FROM orders;
 
--- ÆÇ¸Å°¡°ÝÀÇ ÇÕ --
+-- íŒë§¤ê°€ê²©ì˜ í•© --
 SELECT SUM(saleprice)
 FROM orders;
 
--- ÆÇ¸Å°¡°ÝÀÇ ÇÕ, ÄÃ·³ÀÌ¸§ ÃÑ¸ÅÃâ·Î »Ì±â! --
--- ÄÃ·³¸í¿¡ ¶ç¾î¾²±â ¾²·Á¸é ½Öµû¿ÈÇ¥ ¾È¿¡ ³Ö±â --
-SELECT SUM(saleprice) AS "ÃÑ ¸ÅÃâ"
+-- íŒë§¤ê°€ê²©ì˜ í•©, ì»¬ëŸ¼ì´ë¦„ ì´ë§¤ì¶œë¡œ ë½‘ê¸°! --
+-- ì»¬ëŸ¼ëª…ì— ë„ì–´ì“°ê¸° ì“°ë ¤ë©´ ìŒë”°ì˜´í‘œ ì•ˆì— ë„£ê¸° --
+SELECT SUM(saleprice) AS "ì´ ë§¤ì¶œ"
 FROM orders;
 
--- Q. 2¹ø ±è¿¬¾Æ °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À. --
-SELECT SUM(saleprice) AS "ÃÑ ÆÇ¸Å¾×"
+-- Q. 2ë²ˆ ê¹€ì—°ì•„ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤. --
+SELECT SUM(saleprice) AS "ì´ íŒë§¤ì•¡"
 FROM orders
 WHERE custid = 2;
 
--- ÃÑÇÕ, Æò±Õ, ÃÖ¼Ò, ÃÖ´ë --
+-- ì´í•©, í‰ê· , ìµœì†Œ, ìµœëŒ€ --
 SELECT SUM(saleprice) AS total,
     AVG(saleprice) AS average,
     MIN(saleprice) AS minimum,
     MAX(saleprice) AS maximum
 FROM orders;
 
--- ordersÀÇ Çà ¼ö--
+-- ordersì˜ í–‰ ìˆ˜--
 SELECT COUNT(*)
 FROM orders;
 
-SELECT custid, COUNT(*) AS µµ¼­¼ö·®, SUM(saleprice) AS "ÃÑ ÆÇ¸Å¾×"
+SELECT custid, COUNT(*) AS ë„ì„œìˆ˜ëŸ‰, SUM(saleprice) AS "ì´ íŒë§¤ì•¡"
 FROM orders
 GROUP BY custid;
 
--- Q. °¡°ÝÀÌ 8,000¿ø ÀÌ»óÀÎ µµ¼­¸¦ ±¸¸ÅÇÑ °í°´¿¡ ´ëÇÏ¿© °í°´º° ÁÖ¹® µµ¼­ÀÇ ÃÑ ¼ö·®À» ±¸ÇÏ½Ã¿À.--
-SELECT custid, COUNT(*) AS µµ¼­¼ö·®
+-- Q. ê°€ê²©ì´ 8,000ì› ì´ìƒì¸ ë„ì„œë¥¼ êµ¬ë§¤í•œ ê³ ê°ì— ëŒ€í•˜ì—¬ ê³ ê°ë³„ ì£¼ë¬¸ ë„ì„œì˜ ì´ ìˆ˜ëŸ‰ì„ êµ¬í•˜ì‹œì˜¤.--
+SELECT custid, COUNT(*) AS ë„ì„œìˆ˜ëŸ‰
 FROM orders
 WHERE saleprice >= 8000
 GROUP BY custid;
 
--- ´Ü, µÎ ±Ç ÀÌ»ó ±¸¸ÅÇÑ °í°´¸¸ ±¸ÇÏ½Ã¿À. --
-SELECT custid, COUNT(*) AS µµ¼­¼ö·®
+-- ë‹¨, ë‘ ê¶Œ ì´ìƒ êµ¬ë§¤í•œ ê³ ê°ë§Œ êµ¬í•˜ì‹œì˜¤. --
+SELECT custid, COUNT(*) AS ë„ì„œìˆ˜ëŸ‰
 FROM orders
 WHERE saleprice >= 8000
 GROUP BY custid
 HAVING COUNT(*) >=2;
 
--- µÎ Å×ÀÌºí ÇÑ ¹ø¿¡ ºÒ·¯¿À±â / ÁöÁ¤ÇÑ ÄÃ·³ °°Àº °Í³¢¸® ¸ÅÄª½ÃÄÑ¼­ ºÒ·¯¿À±â --
+-- ë‘ í…Œì´ë¸” í•œ ë²ˆì— ë¶ˆëŸ¬ì˜¤ê¸° / ì§€ì •í•œ ì»¬ëŸ¼ ê°™ì€ ê²ƒë¼ë¦¬ ë§¤ì¹­ì‹œì¼œì„œ ë¶ˆëŸ¬ì˜¤ê¸° --
 SELECT *
 FROM customer, orders
 WHERE customer.custid = orders.custid;
 
--- Q. °î°´°ú °í°´ÀÇ ÁÖ¹®¿¡ °üÇÑ µ¥ÀÌÅÍ¸¦ °í°´º°·Î Á¤·ÄÇÏ¿© º¸ÀÌ½Ã¿À.--
+-- Q. ê³¡ê°ê³¼ ê³ ê°ì˜ ì£¼ë¬¸ì— ê´€í•œ ë°ì´í„°ë¥¼ ê³ ê°ë³„ë¡œ ì •ë ¬í•˜ì—¬ ë³´ì´ì‹œì˜¤.--
 SELECT *
 FROM customer, orders
 WHERE customer.custid = orders.custid
 ORDER BY customer.custid;
 
--- Q. °í°´ÀÇ ÀÌ¸§°ú °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÆÇ¸Å°¡°ÝÀ» °Ë»öÇÏ½Ã¿À. --
+-- Q. ê³ ê°ì˜ ì´ë¦„ê³¼ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ íŒë§¤ê°€ê²©ì„ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT name, saleprice
 FROM customer, orders
 WHERE customer.custid = orders.custid;
 
--- Q. °í°´º°·Î ÁÖ¹®ÇÑ ¸ðµç µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ°í, °í°´º°·Î Á¤·ÄÇÏ½Ã¿À.
-SELECT name, SUM(saleprice) "ÃÑ ÆÇ¸Å¾×"
+-- Q. ê³ ê°ë³„ë¡œ ì£¼ë¬¸í•œ ëª¨ë“  ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ê³ , ê³ ê°ë³„ë¡œ ì •ë ¬í•˜ì‹œì˜¤.
+SELECT name, SUM(saleprice) "ì´ íŒë§¤ì•¡"
 FROM customer C, orders O
 WHERE C.custid = O.custid
 GROUP BY C.name
 ORDER BY C.name;
 
--- AS»ý·«°¡´É--
-SELECT custid, SUM(saleprice) "ÃÑ ÆÇ¸Å¾×"
+-- ASìƒëžµê°€ëŠ¥--
+SELECT custid, SUM(saleprice) "ì´ íŒë§¤ì•¡"
 FROM orders
 GROUP BY custid
 ORDER BY custid;
 
--- Q. °í°´ÀÇ ÀÌ¸§°ú °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÀÌ¸§À» ±¸ÇÏ½Ã¿À.
+-- Q. ê³ ê°ì˜ ì´ë¦„ê³¼ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ë¦„ì„ êµ¬í•˜ì‹œì˜¤.
 SELECT C.name, B.bookname
 FROM customer C, book B, orders O
 WHERE C.custid = O.custid and O.bookid = B.bookid
 ORDER BY C.name;
 
--- Q. °¡°ÝÀÌ 20000¿øÀÎ µµ¼­¸¦ ÁÖ¹®ÇÑ °í°´ÀÇ ÀÌ¸§°ú µµ¼­ÀÇ ÀÌ¸§À» ±¸ÇÏ½Ã¿À.
+-- Q. ê°€ê²©ì´ 20000ì›ì¸ ë„ì„œë¥¼ ì£¼ë¬¸í•œ ê³ ê°ì˜ ì´ë¦„ê³¼ ë„ì„œì˜ ì´ë¦„ì„ êµ¬í•˜ì‹œì˜¤.
 SELECT C.name, B.bookname
 FROM customer C, book B, orders O
 WHERE C.custid = O.custid AND O.bookid = B.bookid AND B.price = 20000;
 
--- Q. µµ¼­¸¦ ±¸¸ÅÇÏÁö ¾ÊÀº °í°´À» Æ÷ÇÔÇÏ¿© °í°´ÀÇ ÀÌ¸§°ú °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÆÇ¸Å°¡°ÝÀ» ±¸ÇÏ½Ã¿À.
--- (+) »ç¿ë --
+-- Q. ë„ì„œë¥¼ êµ¬ë§¤í•˜ì§€ ì•Šì€ ê³ ê°ì„ í¬í•¨í•˜ì—¬ ê³ ê°ì˜ ì´ë¦„ê³¼ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ íŒë§¤ê°€ê²©ì„ êµ¬í•˜ì‹œì˜¤.
+-- (+) ì‚¬ìš© --
 SELECT C.name, O.saleprice
 FROM customer C, orders O
 WHERE C.custid = O.custid(+);
 
--- JOIN »ç¿ë --
+-- JOIN ì‚¬ìš© --
 SELECT customer.name, orders.saleprice
 FROM customer LEFT OUTER JOIN orders ON customer.custid=orders.custid;
 
--- Q. °¡Àå ºñ½Ñ µµ¼­ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À.
--- ºÎ¼ÓÁúÀÇ »ç¿ë --
+-- Q. ê°€ìž¥ ë¹„ì‹¼ ë„ì„œì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤.
+-- ë¶€ì†ì§ˆì˜ ì‚¬ìš© --
 SELECT bookname
 FROM book
 WHERE price=(SELECT MAX(price) FROM book);
 
--- Q. µµ¼­¸¦ ±¸¸ÅÇÑ ÀûÀÌ ÀÖ´Â °í°´ÀÇ ÀÌ¸§À» °Ë»öÇÏ½Ã¿À. --
+-- Q. ë„ì„œë¥¼ êµ¬ë§¤í•œ ì ì´ ìžˆëŠ” ê³ ê°ì˜ ì´ë¦„ì„ ê²€ìƒ‰í•˜ì‹œì˜¤. --
 SELECT DISTINCT C.name
 FROM customer C, orders O
 WHERE C.custid = O.custid;
 
---¼±»ý´Ô--
 SELECT name
 FROM customer
 WHERE custid IN (SELECT custid FROM orders);
 
--- Q. '´ëÇÑ¹Ìµð¾î'¿¡¼­ ÃâÆÇÇÑ µµ¼­¸¦ ±¸¸ÅÇÑ °í°´ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À. --
+-- Q. 'ëŒ€í•œë¯¸ë””ì–´'ì—ì„œ ì¶œíŒí•œ ë„ì„œë¥¼ êµ¬ë§¤í•œ ê³ ê°ì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤. --
 SELECT C.name
 FROM customer C, book B, orders O
-WHERE C.custid = O.custid and O.bookid = B.bookid and B.publisher = '´ëÇÑ¹Ìµð¾î';
+WHERE C.custid = O.custid and O.bookid = B.bookid and B.publisher = 'ëŒ€í•œë¯¸ë””ì–´';
 
---¼±»ý´Ô--
 SELECT name
 FROM customer
 WHERE custid IN (SELECT custid FROM orders
 WHERE bookid IN(SELECT bookid FROM book
-WHERE publisher = '´ëÇÑ¹Ìµð¾î'));
+WHERE publisher = 'ëŒ€í•œë¯¸ë””ì–´'));
 
 
 
--- Q. ÃâÆÇ»çº°·Î ÃâÆÇ»çÀÇ Æò±Õ µµ¼­ °¡°Ýº¸´Ù ºñ½Ñ µµ¼­¸¦ ±¸ÇÏ½Ã¿À. --
+-- Q. ì¶œíŒì‚¬ë³„ë¡œ ì¶œíŒì‚¬ì˜ í‰ê·  ë„ì„œ ê°€ê²©ë³´ë‹¤ ë¹„ì‹¼ ë„ì„œë¥¼ êµ¬í•˜ì‹œì˜¤. --
 
---¼±»ý´Ô--
---°°Àº Å×ÀÌºíÀ» µÎ Å×ÀÌºí·Î ³ª´« ÈÄ ¿¬°á½ÃÄÑ¼­ ±¸ÇÏ±â!--
+--ê°™ì€ í…Œì´ë¸”ì„ ë‘ í…Œì´ë¸”ë¡œ ë‚˜ëˆˆ í›„ ì—°ê²°ì‹œì¼œì„œ êµ¬í•˜ê¸°!--
 SELECT b1.bookname
 FROM book b1
 WHERE b1.price > (SELECT AVG(b2.price) 
 FROM book b2 WHERE b2.publisher = b1.publisher);
 
--- Q. µµ¼­¸¦ ÁÖ¹®ÇÏÁö ¾ÊÀº °í°´ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À. --
+-- Q. ë„ì„œë¥¼ ì£¼ë¬¸í•˜ì§€ ì•Šì€ ê³ ê°ì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤. --
 SELECT name
 FROM customer
 MINUS
@@ -226,7 +223,7 @@ SELECT name
 FROM customer
 WHERE custid NOT IN(SELECT custid FROM orders);
 
--- Q. ÁÖ¹®ÀÌ ÀÖ´Â °í°´ÀÇ ÀÌ¸§°ú ÁÖ¼Ò¸¦ º¸ÀÌ½Ã¿À. --
+-- Q. ì£¼ë¬¸ì´ ìžˆëŠ” ê³ ê°ì˜ ì´ë¦„ê³¼ ì£¼ì†Œë¥¼ ë³´ì´ì‹œì˜¤. --
 SELECT DISTINCT C.name, C.address
 FROM customer C, orders O
 WHERE C.custid = O.custid;
@@ -240,12 +237,12 @@ FROM customer cs
 WHERE EXISTS(SELECT * FROM orders od
 WHERE cs.custid = od.custid);
 
---DDL - Á¦¾àÁ¶°Ç Á¾·ù
--- PRIMARY KEY(±âº»Å°) :
--- UNIQUE(°íÀ¯Å°) : 
+--DDL - ì œì•½ì¡°ê±´ ì¢…ë¥˜
+-- PRIMARY KEY(ê¸°ë³¸í‚¤) :
+-- UNIQUE(ê³ ìœ í‚¤) : 
 -- NOT NULL : 
--- CHECK : ÀÔ·ÂÇÒ ¼ö ÀÖ´Â °ªÀÇ ¹üÀ§ µîÀ» Á¦ÇÑÇÑ´Ù. CHECK Á¦¾àÀ¸·Î´Â TRUE of FALSE ·Î Æò°¡ÇÒ ¼ö ÀÖ´Â ³í¸®½ÄÀ» ÁöÁ¤ÇÑ´Ù.
--- FOREIGN KEY(¿Ü·¡Å°): ´Ù¸¥ Å×ÀÌºí°ú ¿¬°áµÇ´Â Å°--
+-- CHECK : ìž…ë ¥í•  ìˆ˜ ìžˆëŠ” ê°’ì˜ ë²”ìœ„ ë“±ì„ ì œí•œí•œë‹¤. CHECK ì œì•½ìœ¼ë¡œëŠ” TRUE of FALSE ë¡œ í‰ê°€í•  ìˆ˜ ìžˆëŠ” ë…¼ë¦¬ì‹ì„ ì§€ì •í•œë‹¤.
+-- FOREIGN KEY(ì™¸ëž˜í‚¤): ë‹¤ë¥¸ í…Œì´ë¸”ê³¼ ì—°ê²°ë˜ëŠ” í‚¤--
 
 CREATE TABLE newbook(
 bookid NUMBER PRIMARY KEY,
@@ -275,57 +272,57 @@ saleprice NUMBER,
 orderdate DATE,
 PRIMARY KEY(orderid),
 FOREIGN KEY(custid) REFERENCES newcustomer(custid) ON DELETE CASCADE);
--- FOREIGN KEYÀÇ REFERENCES ÀÎ ´Ù¸¥ tableÀÇ ÄÃ·³Àº PRIMARY KEY!
+-- FOREIGN KEYì˜ REFERENCES ì¸ ë‹¤ë¥¸ tableì˜ ì»¬ëŸ¼ì€ PRIMARY KEY!
 
--- »õ·Î¿î ¼Ó¼º Ãß°¡(ALTER, ADD)
+-- ìƒˆë¡œìš´ ì†ì„± ì¶”ê°€(ALTER, ADD)
 ALTER TABLE newbook ADD isbn VARCHAR2(15);
 
 
 
 
---[°úÁ¦_0810]--
+--[ê³¼ì œ_0810]--
 
--- Q. NewBook Å×ÀÌºíÀÇ isbn ¼Ó¼ºÀÇ µ¥ÀÌÅÍ Å¸ÀÔÀ» NUMBERÇüÀ¸·Î º¯°æÇÏ½Ã¿À.
+-- Q. NewBook í…Œì´ë¸”ì˜ isbn ì†ì„±ì˜ ë°ì´í„° íƒ€ìž…ì„ NUMBERí˜•ìœ¼ë¡œ ë³€ê²½í•˜ì‹œì˜¤.
 ALTER TABLE newbook MODIFY isbn NUMBER;
 
--- Q. NewBook Å×ÀÌºíÀÇ isbn ¼Ó¼ºÀ» »èÁ¦ÇÏ½Ã¿À.
+-- Q. NewBook í…Œì´ë¸”ì˜ isbn ì†ì„±ì„ ì‚­ì œí•˜ì‹œì˜¤.
 ALTER TABLE newbook DROP COLUMN isbn;
 
--- Q. NewBook Å×ÀÌºíÀÇ bookid ¼Ó¼º¿¡ NOT NULL Á¦¾àÁ¶°ÇÀ» Àû¿ëÇÏ½Ã¿À.
+-- Q. NewBook í…Œì´ë¸”ì˜ bookid ì†ì„±ì— NOT NULL ì œì•½ì¡°ê±´ì„ ì ìš©í•˜ì‹œì˜¤.
 desc newbook;
 ALTER TABLE newbook MODIFY bookid NOT NULL;
 
--- Q. newbookd Å×ÀÌºíÀÇ ±âº»Å°¸¦ »èÁ¦ÇÑ ÈÄ ´Ù½Ã bookid ¼Ó¼ºÀ» ±âº»Å°·Î º¯°æÇÏ½Ã¿À
+-- Q. newbookd í…Œì´ë¸”ì˜ ê¸°ë³¸í‚¤ë¥¼ ì‚­ì œí•œ í›„ ë‹¤ì‹œ bookid ì†ì„±ì„ ê¸°ë³¸í‚¤ë¡œ ë³€ê²½í•˜ì‹œì˜¤
 ALTER TABLE newbook DROP PRIMARY KEY;
 ALTER TABLE newbook MODIFY bookid PRIMARY KEY;
 
--- Q. NewBook Å×ÀÌºíÀ» »èÁ¦ÇÏ½Ã¿À.
+-- Q. NewBook í…Œì´ë¸”ì„ ì‚­ì œí•˜ì‹œì˜¤.
 DROP TABLE newbook;
 
 
 
--- 08¿ù 11ÀÏ --
+-- 08ì›” 11ì¼ --
 
 SELECT * FROM customer;
 
--- Q. Customer Å×ÀÌºí¿¡¼­ °í°´¹øÈ£°¡ 5ÀÎ °í°´ÀÇ ÁÖ¼Ò¸¦ '´ëÇÑ¹Î±¹ ºÎ»ê'À¸·Î º¯°æÇÏ½Ã¿À.--
+-- Q. Customer í…Œì´ë¸”ì—ì„œ ê³ ê°ë²ˆí˜¸ê°€ 5ì¸ ê³ ê°ì˜ ì£¼ì†Œë¥¼ 'ëŒ€í•œë¯¼êµ­ ë¶€ì‚°'ìœ¼ë¡œ ë³€ê²½í•˜ì‹œì˜¤.--
 UPDATE customer
-SET address = '´ëÇÑ¹Î±¹ ºÎ»ê'
+SET address = 'ëŒ€í•œë¯¼êµ­ ë¶€ì‚°'
 WHERE custid = 5;
 
 SELECT * FROM customer;
 
--- Q. Customer Å×ÀÌºí¿¡¼­ ¹Ú¼¼¸® °í°´ÀÇ ÁÖ¼Ò¸¦ ±è¿¬¾Æ °í°´ÀÇ ÁÖ¼Ò·Î º¯°æÇÏ½Ã¿À.
+-- Q. Customer í…Œì´ë¸”ì—ì„œ ë°•ì„¸ë¦¬ ê³ ê°ì˜ ì£¼ì†Œë¥¼ ê¹€ì—°ì•„ ê³ ê°ì˜ ì£¼ì†Œë¡œ ë³€ê²½í•˜ì‹œì˜¤.
 UPDATE customer
-SET address = (SELECT address FROM customer WHERE name = '±è¿¬¾Æ')
-WHERE name = '¹Ú¼¼¸®';
+SET address = (SELECT address FROM customer WHERE name = 'ê¹€ì—°ì•„')
+WHERE name = 'ë°•ì„¸ë¦¬';
 
 SELECT * FROM customer;
 
--- Q. Customer Å×ÀÌºí¿¡¼­ °í°´¹øÈ£°¡ 5ÀÎ °í°´À» »èÁ¦ÇÑ ÈÄ °á°ú¸¦ È®ÀÎÇÏ½Ã¿À.
+-- Q. Customer í…Œì´ë¸”ì—ì„œ ê³ ê°ë²ˆí˜¸ê°€ 5ì¸ ê³ ê°ì„ ì‚­ì œí•œ í›„ ê²°ê³¼ë¥¼ í™•ì¸í•˜ì‹œì˜¤.
 DELETE customer
 WHERE custid = 5;
 
--- Q. ¸ðµç °í°´À» »èÁ¦ÇÏ½Ã¿À.
--- ORDERS ¿¡¼­ ÂüÁ¶ÇÏ°í ÀÖÀ¸¹Ç·Î ¹Ù·Î DELETE ÇÏ¸é ¾È Áö¿öÁü.
+-- Q. ëª¨ë“  ê³ ê°ì„ ì‚­ì œí•˜ì‹œì˜¤.
+-- ORDERS ì—ì„œ ì°¸ì¡°í•˜ê³  ìžˆìœ¼ë¯€ë¡œ ë°”ë¡œ DELETE í•˜ë©´ ì•ˆ ì§€ì›Œì§.
 DELETE customer;
